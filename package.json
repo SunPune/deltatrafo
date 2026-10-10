@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "start": "node backend/server.js",
+    "start": "node backend/server.js"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
