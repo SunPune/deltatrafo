@@ -12,8 +12,8 @@ const app = express();
 // React production build folder
 const FRONTEND_DIR = path.join(__dirname, "..", "dist");
 
-// Serve React static files
-app.use(express.static(FRONTEND_DIR));
+
+
 
 const PORT = process.env.PORT || 5000;
 
@@ -25,6 +25,10 @@ const DATA_FILE = path.join(
 
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
+
+// Serve React static files
+app.use(express.static(FRONTEND_DIR));
+
 
 
 // --------------------------------------------------
@@ -262,6 +266,13 @@ app.put(
 
   }
 );
+
+// Keep your existing API routes above this section.
+
+// Send React's index.html for frontend routes
+app.get("/{*splat}", (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, "index.html"));
+});
 
 
 // --------------------------------------------------
