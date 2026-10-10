@@ -9,6 +9,12 @@ require("dotenv").config();
 
 const app = express();
 
+// React production build folder
+const FRONTEND_DIR = path.join(__dirname, "..", "dist");
+
+// Serve React static files
+app.use(express.static(FRONTEND_DIR));
+
 const PORT = process.env.PORT || 5000;
 
 const DATA_FILE = path.join(
@@ -111,13 +117,17 @@ function authenticateAdmin(req, res, next) {
 // Health check
 // --------------------------------------------------
 
+// app.get("/", (req, res) => {
+
+//   res.json({
+//     success: true,
+//     message: "DeltaTrafo API is running"
+//   });
+
+// });
+
 app.get("/", (req, res) => {
-
-  res.json({
-    success: true,
-    message: "DeltaTrafo API is running"
-  });
-
+  res.sendFile(path.join(FRONTEND_DIR, "index.html"));
 });
 
 
