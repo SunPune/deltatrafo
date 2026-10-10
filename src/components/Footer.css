@@ -1,0 +1,169 @@
+.site-footer {
+  background: #08141d;
+  color: #ffffff;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px 40px;
+
+  display: grid;
+  grid-template-columns:
+    2fr
+    1fr
+    1.5fr
+    0fr;
+
+  gap: 40px;
+  text-align: left;
+}
+
+.footer-column h3 {
+  margin: 0 0 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer-company p {
+  max-width: 320px;
+  margin-top: 20px;
+  color: #FFFFFF;
+  line-height: 1.7;
+}
+
+/* Logo */
+
+.footer-logo {
+  display: inline-block;
+}
+
+.footer-logo img {
+  width: 180px;
+  height: auto;
+  display: block;
+}
+
+/* Menu */
+
+.footer-menu,
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-menu li {
+  margin-bottom: 12px;
+}
+
+.footer-menu a {
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-menu a:hover {
+  color: #1c6da7;
+}
+
+/* Contact */
+
+.footer-contact li {
+  margin-bottom: 14px;
+  color: #FFFFFF;
+  line-height: 1.5;
+}
+
+.footer-contact a {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  color: #1c6da7;
+}
+
+/* Social */
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-social a {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  color: #ffffff;
+}
+
+/* Bottom */
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #FFFFFF;
+  font-size: 14px;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 120px;
+}
+
+.footer-bottom-links a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-bottom-links a:hover {
+  color: #1c6da7;
+}
+
+.footer-bottom-links .static_link {
+  display: flex;
+  gap: 20px;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+    gap: 30px;
+  }
+
+  .footer-company p {
+    max-width: 100%;
+  }
+
+  .footer-bottom-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-bottom-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

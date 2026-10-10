@@ -1,0 +1,413 @@
+/* =========================================
+   PRODUCT PAGE
+========================================= */
+
+.product-page {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.product-page .product-header {
+  text-align: center;
+
+  padding: 100px 20px 60px;
+
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.product-page .product-label {
+  font-size: 14px;
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  display: inline-block;
+
+  margin-bottom: 15px;
+  color: #EB7113;
+}
+
+.product-page .product-header h1 {
+  font-size: clamp(40px, 5vw, 64px);
+
+  line-height: 1.1;
+
+  margin: 0 0 20px;
+  color: #3f3f3f;
+}
+
+.product-page .product-header p {
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  font-size: 18px;
+
+  line-height: 1.7;
+
+  color: #666;
+}
+
+
+/* =========================================
+   PRODUCT SECTION
+========================================= */
+
+.product-page .product-section {
+  padding: 40px 5% 100px;
+}
+
+.product-container {
+  max-width: 1300px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+}
+
+
+/* =========================================
+   PRODUCT CARD
+========================================= */
+
+.product-page .product-card {
+  background: #ffffff;
+
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+
+  opacity: 0;
+
+  transform: translateY(70px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* Animation */
+
+.product-page .product-card.show {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* Hover */
+
+.product-page .product-card:hover {
+  transform: translateY(-10px);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.14);
+}
+
+
+/* =========================================
+   PRODUCT IMAGE
+========================================= */
+
+.product-page .product-image {
+  position: relative;
+
+  width: 100%;
+
+  height: 280px;
+
+  overflow: hidden;
+}
+
+.product-page .product-image img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: transform 0.5s ease;
+}
+
+.product-page .product-card:hover .product-image img {
+  transform: scale(1.08);
+}
+
+
+/* =========================================
+   BADGE
+========================================= */
+
+.product-page .product-badge {
+  position: absolute;
+
+  top: 15px;
+  left: 15px;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
+   PRODUCT CONTENT
+========================================= */
+
+.product-page .product-content {
+  padding: 25px;
+  border-top: 2px solid #EB7113;
+}
+
+.product-page .product-content h3 {
+  font-size: 22px;
+
+  margin: 0 0 10px;
+}
+
+.product-page .product-content p {
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  color: #161616;
+
+  min-height: 65px;
+
+  margin: 0 0 20px;
+}
+
+
+/* =========================================
+   PRICE + BUTTON
+========================================= */
+
+.product-page .product-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+}
+
+.product-page .product-price {
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+.product-page .product-button {
+  border: none;
+
+  padding: 10px 15px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+    background: #EB7113;
+    color: #FFF;
+}
+
+.product-page .product-button:hover {
+  transform: translateY(-2px);
+
+  opacity: 0.8;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .product-page .product-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* =========================================
+   SMALL TABLET
+========================================= */
+
+@media (max-width: 800px) {
+
+  .product-page .product-container {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+  }
+
+  .product-page .product-image {
+    height: 240px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 550px) {
+
+  .product-page .product-header {
+    padding: 70px 20px 40px;
+  }
+
+  .product-page .product-header h1 {
+    font-size: 38px;
+  }
+
+  .product-page .product-header p {
+    font-size: 16px;
+  }
+
+  .product-page .product-section {
+    padding: 20px 16px 60px;
+  }
+
+  .product-page .product-container {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+  .product-page .product-image {
+    height: 300px;
+  }
+
+  .product-page .product-content {
+    padding: 20px;
+  }
+}
+
+
+
+.heading-section {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  background-image: url("/images/heading-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.heading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.heading-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.heading-content h1 {
+  margin: 0 0 20px;
+  font-size: 52px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.heading-content h2 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.heading-content p {
+  margin: 0 auto;
+  max-width: 700px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #ffffff;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .heading-section {
+    min-height: 350px;
+    padding: 60px 20px;
+  }
+
+  .heading-content h1 {
+    font-size: 38px;
+  }
+
+  .heading-content h2 {
+    font-size: 24px;
+    color: #ffffff;
+  }
+
+  .heading-content p {
+    font-size: 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .heading-section {
+    min-height: 300px;
+    padding: 50px 15px;
+  }
+
+  .heading-content h1 {
+    font-size: 30px;
+  }
+
+  .heading-content p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+
+.custom-requirement {
+    background: #172033;
+    color: #fff;
+    text-align: center;
+    padding: 40px 0;
+}

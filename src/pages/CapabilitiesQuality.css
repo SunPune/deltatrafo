@@ -1,0 +1,850 @@
+.product-capabilities-quality {
+  background: #ffffff;
+  color: #555E65;
+  padding: 60px 0 80px;
+}
+
+.product-capabilities-quality-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* =========================
+   Header
+========================= */
+
+.product-capabilities-quality-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 22px;
+}
+
+.product-capabilities-quality-header h2, .safety-material-protection h2, .quality-assurance-section h2, .manufacturing-facilities h2 {
+    position: relative;
+    max-width: 700px;
+    margin: 0 0 35px;
+    padding-left: 25px;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: #171717;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 5px;
+      height: 85%;
+      border-radius: 5px;
+      background: #eb7113;
+    }
+  }
+
+/* =========================
+   Copper / Brass Tabs
+========================= */
+
+.metal-tabs {
+  display: flex;
+
+  border: 1px solid #0077B5;
+  padding: 4px;
+
+  background: #ffffff;
+}
+
+.metal-tabs button {
+  border: 0;
+  background: transparent;
+
+  color: #999999;
+
+  padding: 11px 18px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.metal-tabs button.active {
+  color: #111111;
+
+  background: linear-gradient(
+    100deg,
+    #b84d1b,
+    #f5c57f
+  );
+
+  box-shadow: 0 0 18px rgba(206, 102, 42, 0.25);
+}
+
+.metal-tabs button:hover:not(.active) {
+  color: #ffffff;
+}
+
+/* =========================
+   Table
+========================= */
+
+.product-table {
+  width: 100%;
+
+  border: 1px solid #0077B5;
+
+  background: #ffffff;
+}
+
+/* =========================
+   Row
+========================= */
+
+.product-row {
+  display: grid;
+
+  grid-template-columns: 245px 1fr;
+
+  min-height: 52px;
+
+  border-bottom: 1px solid #0077B5;
+}
+
+.product-row:last-child {
+  border-bottom: none;
+}
+
+/* =========================
+   Product Name
+========================= */
+
+.product-name {
+  display: flex;
+  align-items: center;
+
+  padding: 14px;
+
+  color: #000000;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================
+   Industries
+========================= */
+
+.product-capabilities-quality-list {
+  display: flex;
+  align-items: center;
+
+  padding: 14px;
+
+  color: #555E65;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================
+   Hover
+========================= */
+
+.product-row {
+  transition: background 0.25s ease;
+}
+
+.product-row:hover {
+  background: #f7f8fa;
+}
+
+.product-row:hover .product-name {
+  color: #000000;
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 768px) {
+
+  .product-capabilities-quality {
+    padding: 45px 0 60px;
+  }
+
+  .product-capabilities-quality-header {
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .product-capabilities-quality-header h2 {
+    font-size: 23px;
+  }
+
+  .product-row {
+    grid-template-columns: 190px 1fr;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+  .product-capabilities-quality-container {
+    width: 92%;
+  }
+
+  .product-capabilities-quality-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-capabilities-quality-header h2 {
+    font-size: 22px;
+  }
+
+  .metal-tabs {
+    align-self: flex-start;
+  }
+
+  .metal-tabs button {
+    padding: 10px 15px;
+  }
+
+  .product-row {
+    grid-template-columns: 1fr;
+  }
+
+  .product-name {
+    padding: 12px 14px 4px;
+  }
+
+  .product-capabilities-quality-list {
+    padding: 4px 14px 14px;
+  }
+}
+
+
+
+.manufacturing-facilities {
+  background: #f7f8fa;
+  color: #555E65;
+  padding: 80px 0;
+  text-align: left;
+}
+
+.manufacturing-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* Header */
+
+.manufacturing-header {
+  margin-bottom: 40px;
+}
+
+.section-label {
+  display: block;
+
+  color: #d56a2b;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 12px;
+}
+
+
+
+.manufacturing-header p {
+  margin-top: 20px;
+    max-width: 100%;
+  color: #555E65;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Listing */
+
+.facilities-list {
+  border-top: 1px solid #0077B5;
+}
+
+.facility-item {
+  display: grid;
+
+  grid-template-columns: 80px 1fr 50px;
+
+  align-items: center;
+
+  min-height: 110px;
+
+  border-bottom: 1px solid #0077B5;
+
+  transition: background 0.3s ease;
+}
+
+.facility-item:hover {
+  background: #ffffff;
+}
+
+/* Number */
+
+.facility-number {
+  color: #d56a2b;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+/* Details */
+
+.facility-details h3 {
+  margin: 0 0 12px;
+
+  color: #d56a2b;
+
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.facility-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+.facility-info span {
+  position: relative;
+}
+
+/* Vertical separator */
+
+.facility-info span:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  width: 1px;
+  height: 12px;
+
+  background: #333;
+
+  right: -16px;
+  top: 2px;
+}
+
+/* Arrow */
+
+.facility-arrow {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid #333;
+
+  color: #aaa;
+
+  font-size: 16px;
+
+  transition: all 0.3s ease;
+}
+
+.facility-item:hover .facility-arrow {
+  color: #111;
+
+  background: linear-gradient(
+    135deg,
+    #b84d1b,
+    #f4c27a
+  );
+
+  border-color: transparent;
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+  .manufacturing-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .manufacturing-header h2 {
+    font-size: 32px;
+  }
+
+  .facility-item {
+    grid-template-columns: 55px 1fr 40px;
+  }
+
+  .facility-info {
+    gap: 15px;
+  }
+
+  .facility-info span:not(:last-child)::after {
+    right: -8px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .manufacturing-facilities {
+    padding: 60px 0;
+  }
+
+  .manufacturing-container {
+    width: 92%;
+  }
+
+  .manufacturing-header h2 {
+    font-size: 28px;
+  }
+
+  .facility-item {
+    grid-template-columns: 40px 1fr 35px;
+
+    min-height: 120px;
+  }
+
+  .facility-details h3 {
+    font-size: 16px;
+  }
+
+  .facility-info {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .facility-info span:not(:last-child)::after {
+    display: none;
+  }
+}
+
+
+
+
+.quality-assurance-section {
+  padding: 100px 0;
+  background: #ffffff;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section-heading {
+    text-align: left;
+    max-width: 750px;
+    margin: 40px 0;
+
+    .section-number {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 0;
+    }
+  }
+
+  .quality-assurance-list {
+    border-top: 1px solid #ddd;
+  }
+
+  .quality-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 30px;
+    padding: 35px 0;
+    border-bottom: 1px solid #ddd;
+
+    .quality-number {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0;
+      line-height: 1.7;
+      color: #666;
+    }
+  }
+}
+
+.quality-content{
+    display: flex;
+    gap: 20;
+}
+.quality-content h3 {
+    text-align: left;
+    width: 300px;
+}
+
+@media (max-width: 768px) {
+  .quality-assurance-section {
+    padding: 60px 0;
+
+    .section-heading {
+      h2 {
+        font-size: 36px;
+      }
+    }
+
+    .quality-item {
+      grid-template-columns: 50px 1fr;
+      gap: 15px;
+
+      h3 {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+
+
+.safety-material-protection {
+  padding: 100px 0;
+  background: #f7f8fa;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  p {
+    max-width: 900px;
+    margin: 0;
+    padding: 30px 35px;
+    border-left: 1px solid #ddd;
+    font-size: 19px;
+    line-height: 1.8;
+    color: #555;
+    background: #fff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+  }
+}
+
+@media (max-width: 768px) {
+  .safety-material-protection {
+    padding: 70px 0;
+
+    .container {
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 36px;
+      padding-left: 18px;
+      margin-bottom: 25px;
+    }
+
+    p {
+      padding: 25px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+  }
+
+  .industry-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+.capabilities-quality-page .certificate-section {
+    background: #ffffff;
+}
+
+
+
+
+
+.why-us {
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.why-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.why-header span {
+  color: #eb7113;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.why-header h2 {
+  font-size: 38px;
+  margin: 15px 0;
+}
+
+.why-header p {
+  max-width: 750px;
+  margin: auto;
+  color: #687080;
+  line-height: 1.6;
+}
+
+/* Slider */
+
+.slider {
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Four cards */
+
+.cards-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Card */
+
+.why-card {
+  position: relative;
+  min-height: 250px;
+  padding: 30px 20px;
+  border: 1px solid #0077B5;
+  border-radius: 10px;
+  text-align: center;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.card-icon {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+}
+
+.why-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.why-card p {
+  color: #687080;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Arrow between cards */
+
+.card-arrow {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: #eb7113;
+  font-size: 28px;
+  font-weight: bold;
+
+  background: white;
+  z-index: 2;
+}
+
+/* Left / Right slider buttons */
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid #ddd;
+  border-radius: 50%;
+
+  background: white;
+  color: #eb7113;
+
+  font-size: 22px;
+  cursor: pointer;
+
+  z-index: 5;
+}
+
+.slider-btn:hover {
+  background: #eb7113;
+  color: white;
+}
+
+.slider-btn.left {
+  left: -55px;
+}
+
+.slider-btn.right {
+  right: -55px;
+}
+
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-arrow {
+    display: none;
+  }
+
+  .slider-btn.left {
+    left: -15px;
+  }
+
+  .slider-btn.right {
+    right: -15px;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .why-card {
+    min-height: 280px;
+  }
+
+  .why-header h2 {
+    font-size: 30px;
+  }
+}
+
+
+.capabilities-quality-page .products-section, .capabilities-quality-page .industry-page-section {
+  background: #f7f8fa;
+  color: #555E65;
+  padding: 80px 0;
+  text-align: left;
+}
+
+.capabilities-quality-page .manufacturing-header .section-label {
+  display: none
+}
+
+
+.capabilities-quality-page .industry-page-section .section-heading {
+  max-width: 1200px;
+}
+
+
+
+
+.industry-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.industry-card {
+  width: 100%;
+}
+
+.industry-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.industry-image img {
+  width: 100%;
+  display: block;
+}
+
+.industry-arrow {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #EB7113;
+  color: #EB7113;
+  font-size: 24px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.industry-arrow:hover {
+  background: #fff;
+  border: 1px solid #EB7113;
+  color: #EB7113;
+}

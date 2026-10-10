@@ -1,0 +1,155 @@
+.requirement-form-section {
+  padding: 80px 20px;
+  background: #f7f7f7;
+}
+
+.requirement-form-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.requirement-form-header {
+  max-width: 750px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.requirement-form-header span {
+  display: block;
+  margin-bottom: 12px;
+  color: #eb7113;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.requirement-form-header h2 {
+  margin: 0 0 15px;
+  font-size: 42px;
+  color: #222;
+}
+
+.requirement-form-header p {
+  margin: 0;
+  color: #666;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.requirement-form {
+  padding: 40px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #222;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.form-group label span {
+  color: #eb7113;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  background: #fff;
+  color: #333;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #eb7113;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input[type="file"] {
+  padding: 12px;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 7px;
+  color: #888;
+  font-size: 12px;
+}
+
+.requirement-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 26px;
+  border: 0;
+  border-radius: 4px;
+  background: #eb7113;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.requirement-submit span {
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+.requirement-submit:hover {
+  background: #d85f08;
+}
+
+.requirement-submit:hover span {
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .requirement-form-section {
+    padding: 60px 15px;
+  }
+
+  .requirement-form-header h2 {
+    font-size: 32px;
+  }
+
+  .requirement-form {
+    padding: 25px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .requirement-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}

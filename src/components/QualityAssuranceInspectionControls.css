@@ -1,0 +1,418 @@
+.manufacturing-section {
+  width: 100%;
+  padding: 40px 30px;
+  background: #FFFFFF;
+}
+
+.manufacturing-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+
+/* =================================
+   HEADER
+================================= */
+
+.manufacturing-header {
+  /* max-width: 850px; */
+  margin-bottom: 20px;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 18px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  color: #777;
+}
+
+.manufacturing-header h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: #0c0c0c;
+}
+
+.manufacturing-header p {
+  margin: 0 auto;
+    max-width: 700px;
+    color: #555E65;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =================================
+   MAIN PROCESS AREA
+================================= */
+
+.manufacturing-process {
+  display: grid;
+
+  grid-template-columns: 45% 55%;
+
+  align-items: start;
+}
+
+
+/* =================================
+   LEFT CURRENT PROCESS
+================================= */
+
+.manufacturing-current {
+  position: sticky;
+
+  top: 100px;
+
+  min-height: 600px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px;
+}
+
+
+/* =================================
+   CIRCLE
+================================= */
+
+.manufacturing-circle {
+  position: relative;
+
+  width: 240px;
+  height: 240px;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #0077B5 var(--progress),
+      #d7d7d3 var(--progress)
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.4s ease;
+}
+
+.manufacturing-circle::before {
+  content: "";
+
+  position: absolute;
+
+  width: 202px;
+  height: 202px;
+
+  border-radius: 50%;
+
+  background: #f5f5f3;
+}
+
+.manufacturing-circle-inner {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: baseline;
+}
+
+.manufacturing-circle-inner span {
+  font-size: 62px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  color: #0077B5;
+}
+
+.manufacturing-circle-inner small {
+  margin-left: 5px;
+
+  font-size: 17px;
+
+  color: #777;
+}
+
+
+/* =================================
+   ACTIVE CONTENT
+================================= */
+
+.manufacturing-active-content {
+  max-width: 470px;
+
+  margin-top: 45px;
+
+  text-align: center;
+}
+
+.manufacturing-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color: #777;
+}
+
+.manufacturing-active-content h3 {
+  margin: 0 0 15px;
+
+  font-size: 32px;
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  color: #111;
+}
+
+.manufacturing-active-content p {
+  margin: 0;
+
+  font-size: 16px;
+  line-height: 1.7;
+
+  color: #666;
+}
+
+
+/* =================================
+   VERTICAL PROCESS LIST
+================================= */
+
+.quality-assurance {
+  position: relative;
+
+  padding: 20px 0;
+}
+
+
+/* Vertical line */
+
+.quality-assurance::before {
+  content: "";
+
+  position: absolute;
+
+  left: 30px;
+
+  top: 20px;
+  bottom: 20px;
+
+  width: 1px;
+
+  background: #d2d2ce;
+}
+
+
+.quality-assurance-item {
+  position: relative;
+
+  min-height: 145px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  padding: 30px 40px 30px 0;
+
+  opacity: 0.35;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.quality-assurance-item.active {
+  opacity: 1;
+
+  transform: translateX(10px);
+}
+
+
+/* Number */
+
+.quality-assurance-number {
+  position: relative;
+
+  z-index: 2;
+
+  width: 60px;
+  height: 60px;
+
+  flex-shrink: 0;
+
+  border: 1px solid #aaa;
+
+  border-radius: 50%;
+
+  background: #f5f5f3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.quality-assurance-item.active .quality-assurance-number {
+  /* background: #EB7113; */
+
+  border-color: #EB7113;
+
+  color: #EB7113;
+}
+
+
+/* Title */
+
+.process-title {
+  font-size: 27px;
+
+  line-height: 1.25;
+
+  font-weight: 600;
+
+  color: #EB7113;
+}
+
+
+/* =================================
+   TABLET
+================================= */
+
+@media (max-width: 900px) {
+
+  .manufacturing-process {
+    grid-template-columns: 1fr;
+  }
+
+  .manufacturing-current {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+
+    min-height: auto;
+
+    padding: 30px;
+
+    background: #f5f5f3;
+  }
+
+  .manufacturing-circle {
+    width: 170px;
+    height: 170px;
+  }
+
+  .manufacturing-circle::before {
+    width: 140px;
+    height: 140px;
+  }
+
+  .manufacturing-circle-inner span {
+    font-size: 45px;
+  }
+
+  .manufacturing-active-content {
+    margin-top: 25px;
+  }
+
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 600px) {
+
+  .manufacturing-section {
+    padding: 40px 20px;
+  }
+
+  .manufacturing-header {
+    margin-bottom: 50px;
+  }
+
+  .manufacturing-header h2 {
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .manufacturing-header p {
+    font-size: 16px;
+  }
+
+  .manufacturing-current {
+    padding: 25px 10px;
+  }
+
+  .manufacturing-circle {
+    width: 145px;
+    height: 145px;
+  }
+
+  .manufacturing-circle::before {
+    width: 120px;
+    height: 120px;
+  }
+
+  .manufacturing-circle-inner span {
+    font-size: 38px;
+  }
+
+  .manufacturing-active-content h3 {
+    font-size: 25px;
+  }
+
+  .manufacturing-active-content p {
+    font-size: 14px;
+  }
+
+  .quality-assurance-item {
+    min-height: 125px;
+
+    gap: 20px;
+
+    padding-right: 0;
+  }
+
+  .quality-assurance::before {
+    left: 24px;
+  }
+
+  .quality-assurance-number {
+    width: 48px;
+    height: 48px;
+  }
+
+  .process-title {
+    font-size: 20px;
+  }
+}

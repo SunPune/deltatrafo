@@ -1,0 +1,398 @@
+.process-section {
+  position: relative;
+  width: 100%;
+
+  /* 7 items = one complete scroll round */
+  height: 700vh;
+
+  background: #f7f8fa;
+}
+
+
+/* ========================================
+   STICKY VIEW
+======================================== */
+
+.process-sticky {
+  position: sticky;
+  top: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  min-height: 650px;
+
+  display: flex;
+  align-items: center;
+
+  background: #f7f8fa;
+
+  overflow: hidden;
+
+  z-index: 5;
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.process-container {
+  width: min(1400px, 92%);
+  margin: 0 auto;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.process-header {
+  max-width: 900px;
+  margin-bottom: 45px;
+}
+
+.process-eyebrow {
+  display: block;
+
+  margin-bottom: 15px;
+
+  color: #c77b3e;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.process-header h2 {
+  margin: 0;
+
+  font-size: clamp(45px, 6vw, 85px);
+
+  line-height: 0.95;
+
+  font-weight: 800;
+
+  letter-spacing: -4px;
+
+  text-transform: uppercase;
+}
+
+.process-header h2 span {
+  background: linear-gradient(
+    90deg,
+    #f2b06c,
+    #d75a24
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.process-header p {
+  max-width: 720px;
+
+  margin: 25px 0 0;
+
+  color: #8d8d8d;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+
+/* ========================================
+   PROCESS LIST
+======================================== */
+
+.process-list {
+  width: 100%;
+
+  height: 240px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+
+/* ========================================
+   PROCESS ITEM
+======================================== */
+
+.process-item {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  height: 80px;
+
+  opacity: 0.28;
+
+  transform: translateX(0) scale(0.96);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+
+/* ACTIVE */
+
+.process-item.active {
+  opacity: 1;
+
+  transform: translateX(10px) scale(1);
+}
+
+
+/* ========================================
+   NUMBER
+======================================== */
+
+.process-number {
+  width: 50px;
+
+  flex-shrink: 0;
+
+  color: #805b3c;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  transition: color 0.4s ease;
+}
+
+.process-item.active .process-number {
+  color: #f0b16e;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.process-item h3 {
+  margin: 0;
+
+  color: #EB7113;
+
+  font-size: clamp(35px, 5vw, 72px);
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -2px;
+
+  text-transform: uppercase;
+
+  transition: all 0.5s ease;
+}
+
+
+/* ACTIVE TITLE */
+
+.process-item.active h3 {
+  /* background: linear-gradient(
+    90deg,
+    #f3b16c 0%,
+    #EB7113 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+
+
+  color: #EB7113;
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    #EB7113 0%,
+    #EB7113 40%,
+    #f3b16c 50%,
+    #EB7113 60%,
+    #EB7113 100%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: lighting 3.5s ease-in-out infinite;
+}
+
+@keyframes lighting {
+  0% {
+    background-position: 200% 0;
+  }
+
+  50% {
+    background-position: 0% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+
+/* ========================================
+   DESCRIPTION
+======================================== */
+
+.process-description {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 20px;
+
+  max-width: 800px;
+
+  margin: 35px auto 0;
+
+  min-height: 70px;
+}
+
+.description-line {
+  width: 2px;
+
+  height: 55px;
+
+  flex-shrink: 0;
+
+  background: linear-gradient(
+    to bottom,
+    #e78943,
+    transparent
+  );
+}
+
+.process-description p {
+  margin: 0;
+
+  color: #211311;
+
+  font-size: 20px;
+
+  line-height: 1.7;
+
+  animation: descriptionFade 0.5s ease;
+}
+
+@keyframes descriptionFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ========================================
+   SCROLL TRIGGERS
+======================================== */
+
+.process-scroll-area {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.process-trigger {
+  height: 100vh;
+
+  min-height: 650;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+
+  .process-section {
+    height: 700vh;
+  }
+
+  .process-sticky {
+    min-height: 650px;
+  }
+
+  .process-container {
+    width: 90%;
+  }
+
+  .process-header {
+    margin-bottom: 30px;
+  }
+
+  .process-header h2 {
+    font-size: 42px;
+
+    letter-spacing: -2px;
+  }
+
+  .process-header p {
+    font-size: 14px;
+  }
+
+  .process-list {
+    height: 180px;
+  }
+
+  .process-item {
+    height: 60px;
+
+    gap: 12px;
+  }
+
+  .process-number {
+    width: 32px;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+  }
+
+  .process-item h3 {
+    font-size: 25px;
+
+    letter-spacing: -1px;
+  }
+
+  .process-description {
+    margin-top: 20px;
+
+    gap: 12px;
+  }
+
+  .process-description p {
+    font-size: 14px;
+  }
+}
