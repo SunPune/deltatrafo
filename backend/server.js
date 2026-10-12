@@ -5,8 +5,19 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-require("dotenv").config();
 const basicAuth = require("express-basic-auth");
+require("dotenv").config();
+
+if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
+  throw new Error(
+    "ADMIN_USERNAME and ADMIN_PASSWORD must be configured"
+  );
+}
+
+if (!process.env.ADMIN_TOKEN) {
+  throw new Error("ADMIN_TOKEN must be configured");
+}
+
 
 const app = express();
 
@@ -14,20 +25,20 @@ const app = express();
 
 // React production build folder
 const FRONTEND_DIR = path.join(__dirname, "..", "dist");
-
-
-
-
 const PORT = process.env.PORT || 5000;
 
-const DATA_FILE = path.join(
-  __dirname,
-  "data",
-  "homeData.json"
-);
-
+// Parse request bodies
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
+
+// Health check: public and accessible to the hosting platform
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "DeltaTrafo server is healthy",
+  });
+});
+
 app.use(
   basicAuth({
     users: {
@@ -39,6 +50,12 @@ app.use(
 
 // Serve React static files
 app.use(express.static(FRONTEND_DIR));
+
+const DATA_FILE = path.join(
+  __dirname,
+  "data",
+  "homeData.json"
+);
 
 
 
