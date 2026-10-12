@@ -6,8 +6,11 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 require("dotenv").config();
+const basicAuth = require("express-basic-auth");
 
 const app = express();
+
+
 
 // React production build folder
 const FRONTEND_DIR = path.join(__dirname, "..", "dist");
@@ -25,6 +28,15 @@ const DATA_FILE = path.join(
 
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
+console.log("Admin username:", process.env.ADMIN_USERNAME);
+app.use(
+  basicAuth({
+    users: {
+      [process.env.ADMIN_USERNAME]: process.env.ADMIN_PASSWORD,
+    },
+    challenge: true,
+  })
+);
 
 // Serve React static files
 app.use(express.static(FRONTEND_DIR));
