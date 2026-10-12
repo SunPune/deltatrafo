@@ -5,18 +5,7 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const basicAuth = require("express-basic-auth");
 require("dotenv").config();
-
-if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
-  throw new Error(
-    "ADMIN_USERNAME and ADMIN_PASSWORD must be configured"
-  );
-}
-
-if (!process.env.ADMIN_TOKEN) {
-  throw new Error("ADMIN_TOKEN must be configured");
-}
 
 
 const app = express();
@@ -39,15 +28,6 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.use(
-  basicAuth({
-    users: {
-      [process.env.ADMIN_USERNAME]: process.env.ADMIN_PASSWORD,
-    },
-    challenge: true,
-  })
-);
-
 // Serve React static files
 app.use(express.static(FRONTEND_DIR));
 
@@ -56,8 +36,6 @@ const DATA_FILE = path.join(
   "data",
   "homeData.json"
 );
-
-
 
 // --------------------------------------------------
 // Helper: Read JSON
