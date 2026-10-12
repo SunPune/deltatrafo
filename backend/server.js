@@ -28,7 +28,6 @@ const DATA_FILE = path.join(
 
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
-console.log("Admin username:", process.env.ADMIN_USERNAME);
 app.use(
   basicAuth({
     users: {
