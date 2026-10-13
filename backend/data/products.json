@@ -1,0 +1,60 @@
+{
+  "insulation-boards-blocks": {
+    "name": "Insulation Boards & Blocks",
+    "shortDescription": "",
+    "description": "Transformer insulation boards and blocks manufactured according to specified dimensions and material requirements.",
+    "images": [
+      "/images/product-1.jpg",
+      "/images/product-2.jpg",
+      "/images/product-3.jpg"
+    ],
+    "specifications": [
+      [
+        "Material",
+        "Iron"
+      ],
+      [
+        "Dimensions",
+        "10x10"
+      ],
+      [
+        "Thickness / Size",
+        "11 KV"
+      ]
+    ]
+  },
+  "rings-end-rings": {
+    "name": "Rings & End Rings",
+    "shortDescription": "Reliable power transformers engineered for efficient high-voltage applications.",
+    "description": "Precisely manufactured rings and end rings for transformer insulation applications.",
+    "images": [
+      "/images/product-1.jpg",
+      "/images/product-2.jpg",
+      "/images/product-3.jpg"
+    ],
+    "specifications": [
+      [
+        "Material",
+        "Iron"
+      ],
+      [
+        "Dimensions",
+        "10x10"
+      ]
+    ]
+  },
+  "spacers": {
+    "name": "Spacers",
+    "shortDescription": "Transformer insulation spacers manufactured for specified applications and dimensional requirements.",
+    "description": "Transformer insulation spacers manufactured for specified applications and dimensional requirements.",
+    "images": [
+      "/images/product-3.jpg"
+    ],
+    "specifications": [
+      [
+        "Material",
+        "Iron"
+      ]
+    ]
+  }
+}

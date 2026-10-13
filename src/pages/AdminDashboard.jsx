@@ -338,13 +338,12 @@ function AdminDashboard() {
 
         <div>
 
-          <h1>
-            DeltaTrafo Admin
-          </h1>
+          <h1>DeltaTrafo Admin</h1>
 
-          <span>
-            Homepage Management
-          </span>
+          <nav>
+            <a href="/admin/dashboard/">Home</a>
+            <a href="/admin/Products">Products</a>
+          </nav>
 
         </div>
 

@@ -3,6 +3,7 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
+const fsPromises = require("fs").promises;
 const path = require("path");
 const crypto = require("crypto");
 require("dotenv").config();
@@ -31,6 +32,7 @@ app.get("/health", (req, res) => {
 // Serve React static files
 app.use(express.static(FRONTEND_DIR));
 
+//admin home page data file
 const DATA_FILE = path.join(
   __dirname,
   "data",
@@ -123,18 +125,173 @@ function authenticateAdmin(req, res, next) {
 }
 
 
-// --------------------------------------------------
-// Health check
-// --------------------------------------------------
+//products
+const PRODUCTS_FILE = path.join(
+  __dirname,
+  "data",
+  "products.json"
+);
 
-// app.get("/", (req, res) => {
+async function readProducts() {
+  
+  const content = await fsPromises.readFile(PRODUCTS_FILE, "utf8");
+  return JSON.parse(content);
+}
 
-//   res.json({
-//     success: true,
-//     message: "DeltaTrafo API is running"
-//   });
+async function saveProducts(products) {
+  const tempFile = PRODUCTS_FILE + ".tmp";
 
-// });
+  // Check whether products.json exists
+  await fsPromises.access(PRODUCTS_FILE);
+
+  await fsPromises.writeFile(
+    tempFile,
+    JSON.stringify(products, null, 2),
+    "utf8"
+  );
+
+  await fsPromises.rename(tempFile, PRODUCTS_FILE);
+}
+
+function createSlug(name) {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function validProduct(product) {
+  return (
+    product &&
+    typeof product.name === "string" &&
+    product.name.trim() !== "" &&
+    typeof product.description === "string" &&
+    Array.isArray(product.images) &&
+    product.images.every(image => typeof image === "string") &&
+    Array.isArray(product.specifications) &&
+    product.specifications.every(
+      row =>
+        Array.isArray(row) &&
+        row.length === 2 &&
+        row.every(value => typeof value === "string")
+    )
+  );
+}
+
+// GET: Fetch all products
+app.get("/api/products", async (req, res) => {
+  console.log("Fetching all products");
+
+  try {
+    const products = await readProducts();
+    res.json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+
+    res.status(500).json({
+      message: "Unable to load products"
+    });
+  }
+});
+
+// GET: Fetch one product
+app.get("/api/products/:slug", async (req, res) => {
+  try {
+    const products = await readProducts();
+    const product = products[req.params.slug];
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Unable to load product" });
+  }
+});
+
+// POST: Add a product
+app.post("/api/products", async (req, res) => {
+  try {
+    const product = req.body;
+
+    if (!validProduct(product)) {
+      return res.status(400).json({ message: "Invalid product data" });
+    }
+
+    const products = await readProducts();
+    const slug = createSlug(product.slug || product.name);
+
+    if (!slug) {
+      return res.status(400).json({ message: "Invalid product slug" });
+    }
+
+    if (products[slug]) {
+      return res.status(409).json({ message: "Product already exists" });
+    }
+
+    products[slug] = product;
+    delete products[slug].slug;
+
+    await saveProducts(products);
+
+    res.status(201).json({ slug, product: products[slug] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Unable to add product" });
+  }
+});
+
+// PUT: Update a product without changing its URL slug
+app.put("/api/products/:slug", async (req, res) => {
+  try {
+    const products = await readProducts();
+    const slug = req.params.slug;
+
+    if (!products[slug]) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    if (!validProduct(req.body)) {
+      return res.status(400).json({ message: "Invalid product data" });
+    }
+
+    products[slug] = req.body;
+    delete products[slug].slug;
+
+    await saveProducts(products);
+
+    res.json({ slug, product: products[slug] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Unable to update product" });
+  }
+});
+
+// DELETE: Delete a product
+app.delete("/api/products/:slug", async (req, res) => {
+  try {
+    const products = await readProducts();
+    const slug = req.params.slug;
+
+    if (!products[slug]) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    delete products[slug];
+    await saveProducts(products);
+
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Unable to delete product" });
+  }
+});
+
+
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(FRONTEND_DIR, "index.html"));

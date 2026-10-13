@@ -28,6 +28,8 @@ import Industries from "./pages/Industries";
 
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminProducts from "./pages/AdminProducts";
+
 
 
 import "./App.css";
@@ -145,10 +147,8 @@ function App() {
 
         {/* Admin Dashboard */}
 
-        <Route
-          path="/admin/dashboard"
-          element={<AdminDashboard />}
-        />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/Products" element={<AdminProducts />} />
 
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contact-us" element={<ContactUs />} />

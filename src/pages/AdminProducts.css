@@ -1,0 +1,251 @@
+
+/* Admin Products Page */
+
+.admin-products {
+  --admin-primary: #eb7113;
+  --admin-primary-hover: #d65f08;
+  --admin-border: #e2e5e9;
+  --admin-text: #222831;
+  --admin-muted: #687386;
+  --admin-bg: #f5f7fa;
+
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 32px;
+  color: var(--admin-text);
+  background: var(--admin-bg);
+  border-radius: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+.admin-products *,
+.admin-products *::before,
+.admin-products *::after {
+  box-sizing: border-box;
+}
+
+.admin-products h1 {
+  margin: 0 0 28px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.admin-products h2 {
+  margin: 32px 0 16px;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.admin-products h3 {
+  margin: 24px 0 12px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* Form Layout */
+
+.admin-products form {
+  margin-top: 20px;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgb(20 30 50 / 4%);
+}
+
+.admin-products form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  color: var(--admin-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Inputs */
+
+.admin-products input,
+.admin-products textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  color: var(--admin-text);
+  background: #fff;
+  border: 1px solid #ccd2da;
+  border-radius: 7px;
+  outline: none;
+  font: inherit;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-products input {
+  min-height: 44px;
+}
+
+.admin-products textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.admin-products input:focus,
+.admin-products textarea:focus {
+  border-color: var(--admin-primary);
+  box-shadow: 0 0 0 3px rgb(235 113 19 / 13%);
+}
+
+.admin-products input:disabled {
+  background: #f0f1f3;
+  color: var(--admin-muted);
+  cursor: not-allowed;
+}
+
+/* Buttons */
+
+.admin-products button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  margin: 4px 6px 4px 0;
+  padding: 10px 16px;
+  color: #fff;
+  background: var(--admin-primary);
+  border: 1px solid var(--admin-primary);
+  border-radius: 7px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.admin-products button:hover:not(:disabled) {
+  background: var(--admin-primary-hover);
+  border-color: var(--admin-primary-hover);
+}
+
+.admin-products button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.admin-products button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Existing Product Rows */
+
+.admin-product-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid var(--admin-border);
+  border-radius: 9px;
+}
+
+.admin-product-row span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.admin-product-row button {
+  flex-shrink: 0;
+}
+
+/* Image and Specification Rows */
+
+.admin-products form > div:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.admin-products form > div > input {
+  margin-bottom: 8px;
+}
+
+.admin-products form > div > button {
+  margin-bottom: 10px;
+}
+
+/* Status Message */
+
+.admin-products [role="status"] {
+  margin-top: 20px;
+  padding: 13px 16px;
+  color: #22543d;
+  background: #e8f6ed;
+  border: 1px solid #c7e8d1;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .admin-products {
+    margin: 16px auto;
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .admin-products h1 {
+    font-size: 25px;
+  }
+
+  .admin-products h2 {
+    font-size: 19px;
+  }
+
+  .admin-products form {
+    padding: 18px;
+  }
+
+  .admin-product-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .admin-product-row span {
+    flex-basis: 100%;
+    margin-bottom: 4px;
+  }
+
+  .admin-products button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-products {
+    padding: 12px;
+  }
+
+  .admin-products form {
+    padding: 14px;
+  }
+
+  .admin-products h1 {
+    font-size: 22px;
+  }
+
+  .admin-products button {
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+}

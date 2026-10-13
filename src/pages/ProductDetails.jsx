@@ -148,7 +148,7 @@ const products = {
 
 
   "radial-axial-spacers": {
-      name: "Radial & Axial Spacers",
+    name: "Radial & Axial Spacers",
     description: "Spacers manufactured according to application-specific dimensional requirements.",
     images: ["/images/product-8.jpg"],
     specifications: [

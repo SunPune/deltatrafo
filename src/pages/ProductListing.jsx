@@ -6,7 +6,9 @@ import RequirementForm from "../components/RequirementForm";
 import Footer from "../components/Footer";
 import "./ProductListing.css";
 
-const products = [
+const API_URL = "/api/products";
+
+const products1 = [
   {
     id: 1,
     name: "Insulation Boards & Blocks",
@@ -93,6 +95,7 @@ const products = [
   },
 ];
 
+
 const ProductCard = ({ product, index }) => {
   const cardRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -119,6 +122,11 @@ const ProductCard = ({ product, index }) => {
 
 
   const createSlug = (title) => {
+
+    if (typeof title !== "string" || !title.trim()) {
+      return "";
+    }
+
     return title
       .toLowerCase()
       .trim()
@@ -136,11 +144,14 @@ const ProductCard = ({ product, index }) => {
       style={{ transitionDelay: `${index * 0.1}s` }}
     >
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        <img
+          src={product.images?.[0] || product.image || "/images/placeholder.jpg"}
+          alt={product.name || "Product image"}
+        />
 
-        <span className="product-badge">
+        {/* <span className="product-badge">
           New
-        </span>
+        </span> */}
       </div>
 
       <div className="product-content">
@@ -161,6 +172,55 @@ const ProductCard = ({ product, index }) => {
 };
 
 const ProductListing = () => {
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadProducts() {
+      try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+          throw new Error(`Unable to load products (${response.status})`);
+        }
+
+        const result = await response.json();
+
+        // Backend returns an object keyed by product slug.
+        const productList = Array.isArray(result)
+          ? result
+          : Object.entries(result).map(([slug, product]) => ({
+              ...product,
+              slug,
+            }));
+
+        if (!cancelled) {
+          setProducts(productList);
+        }
+      } catch (err) {
+        console.error("Unable to load products:", err);
+
+        if (!cancelled) {
+          setError("Unable to load products. Please try again later.");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadProducts();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <>
       <TopBar />
@@ -186,7 +246,7 @@ const ProductListing = () => {
           <div className="product-container">
             {products.map((product, index) => (
               <ProductCard
-                key={product.id}
+                key={product.slug || index}
                 product={product}
                 index={index}
               />
