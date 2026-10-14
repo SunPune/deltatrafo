@@ -427,7 +427,7 @@ function AdminDashboard() {
                 <div className="admin-field">
 
                   <label>
-                    Image Path
+                    Desktop Image Path
                   </label>
 
                   <input
@@ -437,6 +437,26 @@ function AdminDashboard() {
                       updateBanner(
                         index,
                         "image",
+                        event.target.value
+                      )
+                    }
+                  />
+
+                </div>
+
+                <div className="admin-field">
+
+                  <label>
+                    Mobile Image Path
+                  </label>
+
+                  <input
+                    type="text"
+                    value={banner.mob_image}
+                    onChange={(event) =>
+                      updateBanner(
+                        index,
+                        "mob_image",
                         event.target.value
                       )
                     }

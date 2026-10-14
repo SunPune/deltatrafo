@@ -2,25 +2,27 @@
   "banners": [
     {
       "id": 1,
-      "image": "/images/banner3.jpg",
+      "image": "/images/DeltaTrafo_Banner_01_Transformer_Insulation.jpeg",
       "title": "Transformer Insulation Parts & Accessories",
       "description": "Precision-manufactured insulation components for transformer and electrical industry applications.",
-      "showText": true,
+      "showText": false,
       "textPosition": "bottom",
       "buttonText": "Learn More",
       "buttonLink": "/about",
       "buttonColor": "#FF5733",
       "buttonTextColor": "#FFFFFF",
-      "buttonHiden": true
+      "buttonHiden": false,
+      "mob_image": "/images/DeltaTrafo_Mobile_Banner_01_Transformer_Insulation.jpg"
     },
     {
       "id": 1790428088977,
-      "image": "/images/banner1.jpg",
+      "image": "/images/DeltaTrafo_Banner_02_Insulation_Accessories.jpeg",
       "title": "New Banner",
       "description": "Enter banner description",
-      "showText": true,
-      "textPosition": "center",
-      "buttonHiden": false
+      "showText": false,
+      "textPosition": "bottom",
+      "buttonHiden": false,
+      "mob_image": "/images/DeltaTrafo_Mobile_Banner_02_Insulation_Accessories.jpg"
     }
   ],
   "about": {

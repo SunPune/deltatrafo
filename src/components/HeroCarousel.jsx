@@ -152,7 +152,13 @@ function HeroCarousel() {
           >
 
             <img
+              className="hero-slide-desktop"
               src={banner.image}
+              alt={banner.title}
+            />
+            <img
+              className="hero-slide-mobile"
+              src={banner.mob_image}
               alt={banner.title}
             />
 
