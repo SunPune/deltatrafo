@@ -154,15 +154,18 @@
 /* Button */
 
 .product-enquiry-button {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 13px 28px;
-  background: #222;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: 600;
-  transition: 0.2s;
+  cursor: pointer;
+    color: #fff;
+    background-color: #eb7113;
+    border: none;
+    border-radius: 6px;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    margin: 40px 0;
 }
 
 .product-enquiry-button:hover {

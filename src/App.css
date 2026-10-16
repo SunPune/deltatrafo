@@ -448,7 +448,7 @@ a {
 ========================= */
 
 .about-section {
-  padding: 100px 0;
+  padding: 60px 0;
   background: #f7f8fa;
 }
 
@@ -470,10 +470,15 @@ a {
 .section-label {
   display: inline-block;
   color: #EB7113;
-  font-size: 14px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 12px;
+}
+
+.home-page .features-section {
+  background: #f7f8fa;
+  padding: 40px 0;
 }
 
 .about-content h2,
@@ -522,7 +527,8 @@ a {
 
 .contact-section p {
   margin-bottom: 30px;
-  color: #ddd;
+  color: #000000;
+  font-size: 18px;
 }
 
 /* =========================
@@ -1127,6 +1133,13 @@ a {
   padding-bottom: 20px;
 }
 
+.contact-us-page .process-section {
+  padding: 20px 0;
+}
+.contact-us-page .certificate-section {
+  padding: 40px 0;
+}
+
 .contact-us-page .contact-form-wrapper {
   border-top: 5px solid #e8682d;
 }
@@ -1155,6 +1168,15 @@ a {
   /* On mobile both come from left */
   .contact-us-page .contact-map, .contact-us-page .contact-info { transform: translateX(-60px); }
   .contact-us-page .contact-section.show .contact-map, .contact-us-page .contact-section.show .contact-info { transform: translateX(0); }
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+    height: 100vh;
+    touch-action: none;
+  }
 }
 
 .burger-menu {
@@ -1612,7 +1634,7 @@ a {
     top: 100%;
     left: 0;
 
-    width: 100%;
+    width: 68%;
 
     flex-direction: column;
 

@@ -6,6 +6,7 @@ const fs = require("fs");
 const fsPromises = require("fs").promises;
 const path = require("path");
 const crypto = require("crypto");
+const multer = require("multer");
 require("dotenv").config();
 
 
@@ -20,6 +21,62 @@ const PORT = process.env.PORT || 5000;
 // Parse request bodies
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
+
+//upload
+const UPLOAD_DIR = path.join(__dirname, "images");
+
+fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+
+// Store uploaded images
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, UPLOAD_DIR);
+  },
+
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const filename =
+      crypto.randomUUID() + ext;
+
+    cb(null, filename);
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5 MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+    ];
+
+    if (allowedTypes.includes(file.mimetype)) {
+      return cb(null, true);
+    }
+
+    cb(new Error("Only JPG, PNG, and WebP images are allowed"));
+  },
+});
+
+// Serve uploaded images publicly
+app.use("/images", express.static(UPLOAD_DIR));
+
+// Upload API
+app.post("/api/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "Please select an image" });
+  }
+
+  res.json({
+    message: "Image uploaded successfully",
+    imageUrl: `/images/${req.file.filename}`,
+  });
+});
+
 
 // Health check: public and accessible to the hosting platform
 app.get("/health", (req, res) => {

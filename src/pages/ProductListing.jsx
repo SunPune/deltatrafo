@@ -143,6 +143,7 @@ const ProductCard = ({ product, index }) => {
       className={`product-card ${isVisible ? "show" : ""}`}
       style={{ transitionDelay: `${index * 0.1}s` }}
     >
+      <a href={`/products/${slug}`}>
       <div className="product-image">
         <img
           src={product.images?.[0] || product.image || "/images/placeholder.jpg"}
@@ -167,6 +168,7 @@ const ProductCard = ({ product, index }) => {
           </a>
         </div>
       </div>
+      </a>
     </div>
   );
 };

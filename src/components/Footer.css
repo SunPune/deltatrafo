@@ -106,7 +106,12 @@
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
-
+.disabled-link {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: gray;
+  text-decoration: none;
+}
 .footer-bottom-container {
   max-width: 1200px;
   margin: 0 auto;

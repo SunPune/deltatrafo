@@ -340,7 +340,7 @@ function ProductDetails() {
             </div>
 
             <Link
-                to="/contactus"
+                to="/contact-us"
                 className="product-enquiry-button"
             >
                 Enquire Now

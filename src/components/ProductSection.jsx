@@ -111,7 +111,7 @@ function ProductSection() {
 
               {sliderProducts.map((product, index) => (
                 <div className="product-slide" style={{ flex: `0 0 ${100 / cardsToShow}%` }} key={`${product.id}-${index}`}>
-                  <div className="product-card">
+                  <a href={`/products/${product.id}`} className="product-link"><div className="product-card">
 
                     <div className="product-image">
                       <img src={product.image} alt={product.name} loading="lazy" />
@@ -123,7 +123,7 @@ function ProductSection() {
                       <a href={`/products/${product.id}`} className="product-link">View Product <span>→</span></a>
                     </div>
 
-                  </div>
+                  </div></a>
                 </div>
               ))}
 

@@ -44,7 +44,7 @@ function HomePage() {
 
       <Header />
 
-      <main>
+      <main className="home-page">
 
         <HeroCarousel />
 

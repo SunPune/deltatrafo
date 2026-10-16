@@ -84,7 +84,7 @@
 .product-page .product-card {
   background: #ffffff;
 
-  border-radius: 15px;
+  /* border-radius: 15px; */
 
   overflow: hidden;
 
@@ -178,7 +178,11 @@
 
 .product-page .product-content {
   padding: 25px;
-  border-top: 2px solid #EB7113;
+  border-top: 1px solid #EB7113;
+}
+
+.product-page .product-card:hover .product-content a button {
+  background: #0077b5;
 }
 
 .product-page .product-content h3 {

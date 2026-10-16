@@ -29,6 +29,19 @@ function Header() {
     };
   }, []);
 
+  // Disable vertical scrolling when mobile menu is open
+useEffect(() => {
+  if (window.innerWidth <= 768 && menuOpen) {
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.overflowY = "";
+  }
+
+  return () => {
+    document.body.style.overflowY = "";
+  };
+}, [menuOpen]);
+
   return (
     <header className="main-header">
 

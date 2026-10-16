@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+  import React, { useEffect, useRef, useState } from "react";
 
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
@@ -283,6 +283,7 @@ const industries = [
 
       <div className="why-header">
         <h2>Manufacturing Process</h2>
+        <p>Our manufacturing process follows a structured workflow, from reviewing customer requirements and selecting materials to component processing, machining, inspection and dispatch. Each stage focuses on meeting specified requirements with precision, consistency and quality.</p>
       </div>
 
       <div className="slider">
@@ -333,8 +334,8 @@ const industries = [
           <div className="container">
 
             <div className="section-heading">
-              <h2>Manufacturing Facilities</h2>
-              <p>Use authentic machine/facility photographs from the company profile where possible. Suggested machine captions:</p>
+              <h2>MACHINERY & MANUFACTURING FACILITIES</h2>
+              <p>Our manufacturing facilities are equipped with specialized machinery to support precise cutting, machining, forming and processing of transformer insulation components. These capabilities enable us to manufacture components according to customer drawings, dimensional requirements and specifications, with a focus on quality and consistency.</p>
             </div>
 
             <div className="products-slider" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
@@ -386,7 +387,7 @@ const industries = [
 
             <div className="section-heading">
               <h2>Safety & Material Protection</h2>
-              <p>Safety awareness and appropriate handling practices are maintained across manufacturing, storage and handling activities. Insulation materials should be protected from moisture, leakage, contamination and physical damage.</p>
+              <p>Delta Trafo Manufacturer emphasizes workplace safety awareness, environmental management and the proper handling of insulation materials. Our approach includes PPE awareness, fire-safety communication and protective practices to help safeguard materials against water, moisture, leakage, contamination and physical damage.</p>
             </div>
           
 

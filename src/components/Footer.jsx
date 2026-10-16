@@ -104,8 +104,22 @@ MAHARASHTRA, INDIA
 
           <div className="footer-bottom-links">
             <div className="static_link">
-            <Link to="/privacy-policy">Privacy Policy</Link> |
-            <Link to="/terms">Terms & Conditions</Link>
+            <Link
+              to="#"
+              onClick={(e) => e.preventDefault()}
+              className="disabled-link"
+              aria-disabled="true"
+            >
+              Privacy Policy
+            </Link> |
+            <Link
+              to="#"
+              onClick={(e) => e.preventDefault()}
+              className="disabled-link"
+              aria-disabled="true"
+            >
+              Terms & Conditions
+            </Link>
             </div>
             <SocialIcons />
           </div>

@@ -5,12 +5,12 @@ const industries = [
   {
     id: 1,
     title: "Transformer Manufacturers",
-    image: "/images/business1.jpg",
+    image: "/images/transformerm-anufacturing-excellence.jpeg",
   },
   {
     id: 2,
     title: "Distribution Transformer Manufacturers",
-    image: "/images/business2.jpg",
+    image: "/images/DeltaTrafo_Distribution_Transformer_Manufacturers.jpeg",
   },
   {
     id: 3,

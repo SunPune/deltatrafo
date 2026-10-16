@@ -271,10 +271,9 @@
 
 .manufacturing-header p {
   margin-top: 20px;
-    max-width: 100%;
-  color: #555E65;
-
-  font-size: 14px;
+  max-width: 100%;
+  color: #000000;
+  font-size: 18px;
   line-height: 1.7;
 }
 
@@ -624,7 +623,8 @@
 .why-header p {
   max-width: 750px;
   margin: auto;
-  color: #687080;
+  color: #000000;
+  font-size: 18px;
   line-height: 1.6;
 }
 

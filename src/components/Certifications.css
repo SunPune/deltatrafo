@@ -27,7 +27,7 @@
 .certificate-heading h2 {
   margin: 0 0 18px;
 
-  font-size: 42px;
+  font-size: 40px;
   line-height: 1.2;
 
   font-weight: 700;
@@ -37,13 +37,10 @@
 
 .certificate-heading p {
   margin: 0 auto;
-
   max-width: 750px;
-
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.7;
-
-  color: #666666;
+  color: #000000;
 }
 
 
