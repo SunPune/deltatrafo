@@ -5,7 +5,7 @@ const industries = [
   {
     id: 1,
     title: "Transformer Manufacturers",
-    image: "/images/transformerm-anufacturing-excellence.jpeg",
+    image: "/images/tm-is.jpg",
   },
   {
     id: 2,
