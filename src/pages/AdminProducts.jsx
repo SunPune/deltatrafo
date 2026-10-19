@@ -177,6 +177,61 @@ export default function AdminProducts() {
     navigate("/admin/login");
   }
 
+
+async function uploadImage(event, index) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+  ];
+
+  if (!allowedTypes.includes(file.type)) {
+    setMessage("Please select a JPG, PNG, or WebP image.");
+    event.target.value = "";
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    setMessage("Image size must be less than 5 MB.");
+    event.target.value = "";
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  try {
+    setBusy(true);
+    setMessage("");
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Image upload failed");
+    }
+
+    updateImage(index, result.imageUrl);
+    setMessage("Image uploaded successfully");
+  } catch (error) {
+    setMessage(error.message);
+  } finally {
+    setBusy(false);
+    event.target.value = "";
+  }
+}
+
+
   return (
     <div className="admin-page">
 
@@ -203,12 +258,12 @@ export default function AdminProducts() {
     <main className="admin-products">
       <h1>Product Management</h1>
 
-      <button type="button" onClick={newProduct}>
-        Add New Product
-      </button>
-
-      <h2>Existing Products</h2>
-
+      <div className="admin-products-header">
+        <h2>Existing Products</h2>
+        <button type="button" onClick={newProduct}>
+          Add New Product
+        </button>
+      </div>
       {Object.entries(products).map(([slug, product]) => (
         <div key={slug} className="admin-product-row">
           <span>{product.name}</span>
@@ -271,33 +326,40 @@ export default function AdminProducts() {
 
         <h3>Images</h3>
 
-        {form.images.map((image, index) => (
-          <div key={index}>
-            <input
-              value={image}
-              placeholder="/images/product-1.jpg"
-              onChange={event => updateImage(index, event.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() =>
-                updateField(
-                  "images",
-                  form.images.filter((_, i) => i !== index)
-                )
-              }
-            >
-              Remove
-            </button>
-          </div>
-        ))}
+{form.images.map((image, index) => (
+  <div className="admin-image-field" key={index}>
+    <label>
+      Product Image {index + 1}
+
+      <input
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        onChange={(event) => uploadImage(event, index)}
+        disabled={busy}
+      />
+    </label>
+
+    {image && (
+      <div className="admin-image-preview">
+        <img src={image} alt={`Product ${index + 1}`} />
 
         <button
           type="button"
-          onClick={() => updateField("images", [...form.images, ""])}
+          onClick={() => updateImage(index, "")}
         >
-          Add Image
+          Remove Image
         </button>
+      </div>
+    )}
+  </div>
+))}
+
+<button
+  type="button"
+  onClick={() => updateField("images", [...form.images, ""])}
+>
+  Add Image
+</button>
 
         <h3>Specifications</h3>
 

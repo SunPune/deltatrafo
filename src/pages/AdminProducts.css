@@ -195,6 +195,44 @@
   font-size: 14px;
 }
 
+
+.admin-products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-product-row span {
+  text-align: left;
+}
+
+.admin-products form>label, .admin-image-field label, .admin-products h3 {
+  text-align: left;
+}
+
+.admin-header div{
+  display: flex;
+  gap: 100px;
+}
+
+.admin-header nav a {
+  padding: 0 10px;
+}
+
+.admin-header h1{
+  color: var(--admin-primary);
+}
+
+.admin-field label {
+  text-align: left;
+}
+
+.admin-section-header-text {
+  width: 100%;
+}
+
 /* Responsive Design */
 
 @media (max-width: 768px) {
@@ -247,5 +285,57 @@
   .admin-products button {
     padding: 9px 12px;
     font-size: 13px;
+  }
+}
+
+
+
+
+.admin-image-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  margin: 12px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.admin-image-field label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-image-field input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.admin-image-preview {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-image-preview img {
+  width: 150px;
+  height: 120px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .admin-image-preview img {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    max-height: 220px;
   }
 }

@@ -15,6 +15,8 @@ function AdminDashboard() {
 
   const [message, setMessage] = useState("");
 
+  const [busy, setBusy] = useState(false);
+
   const token = localStorage.getItem(
     "deltatrafo_admin_token"
   );
@@ -210,6 +212,31 @@ function AdminDashboard() {
 
   };
 
+  // ------------------------------------------------
+  // Update About
+  // ------------------------------------------------
+
+  const updateProducts = (
+    field,
+    value
+  ) => {
+
+    setHomeData((previous) => ({
+
+      ...previous,
+
+      products: {
+
+        ...previous.products,
+
+        [field]: value
+
+      }
+
+    }));
+
+  };
+
 
   // ------------------------------------------------
   // Save JSON
@@ -302,6 +329,68 @@ function AdminDashboard() {
   };
 
 
+
+  async function uploadImage(event, index) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+      setMessage("Please select a JPG, PNG, or WebP image.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage("Image size must be less than 5 MB.");
+      event.target.value = "";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      setBusy(true);
+      setMessage("");
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.message || "Image upload failed"
+        );
+      }
+
+      if (!result.imageUrl) {
+        throw new Error("Server did not return an image URL.");
+      }
+
+      updateProducts("image", result.imageUrl);
+
+      setMessage("Image uploaded successfully. Click Save Changes.");
+    } catch (error) {
+      setMessage(error.message || "Image upload failed.");
+    } finally {
+      setBusy(false);
+      event.target.value = "";
+    }  
+  }
+
+
   // ------------------------------------------------
   // Loading
   // ------------------------------------------------
@@ -376,7 +465,7 @@ function AdminDashboard() {
 
           <div className="admin-section-header">
 
-            <div>
+            <div className="admin-section-header-text">
 
               <h2>
                 Banner Management
@@ -586,7 +675,7 @@ function AdminDashboard() {
 
           <div className="admin-section-header">
 
-            <div>
+            <div className="admin-section-header-text">
 
               <h2>
                 About DeltaTrafo
@@ -609,7 +698,7 @@ function AdminDashboard() {
 
             <input
               type="text"
-              value={homeData.about.title}
+              value={homeData.about?.title || ""}
               onChange={(event) =>
                 updateAbout(
                   "title",
@@ -628,7 +717,7 @@ function AdminDashboard() {
 
             <input
               type="text"
-              value={homeData.about.subtitle}
+              value={homeData.about?.subtitle || "" }
               onChange={(event) =>
                 updateAbout(
                   "subtitle",
@@ -648,7 +737,7 @@ function AdminDashboard() {
 
             <input
               type="text"
-              value={homeData.about.image}
+              value={homeData.about?.image || ""}
               onChange={(event) =>
                 updateAbout(
                   "image",
@@ -669,7 +758,7 @@ function AdminDashboard() {
             <textarea
               rows="8"
               value={
-                homeData.about.description
+                homeData.about?.description || ""
               }
               onChange={(event) =>
                 updateAbout(
@@ -689,9 +778,158 @@ function AdminDashboard() {
 
             <input
               type="text"
-              value={homeData.about.cta_name}
+              value={homeData.about?.cta_name || ""}
               onChange={(event) =>
                 updateAbout(
+                  "cta_name",
+                  event.target.value
+                )
+              }
+            />
+
+          </div>
+
+        </section>
+
+
+
+        {/* Our Products */}
+
+        <section className="admin-section">
+
+          <div className="admin-section-header">
+
+            <div className="admin-section-header-text">
+
+              <h2>
+                Our Products
+              </h2>
+
+              <p>
+                Update Our Products content.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div className="admin-field">
+
+            <label>
+              Title
+            </label>
+
+            <input
+              type="text"
+              value={homeData.products?.title || ""}
+              onChange={(event) =>
+                updateProducts(
+                  "title",
+                  event.target.value
+                )
+              }
+            />
+
+          </div>
+
+          <div className="admin-field">
+
+            <label>
+              Sub Title
+            </label>
+
+            <input
+              type="text"
+              value={homeData.products?.subtitle || ""}
+              onChange={(event) =>
+                updateProducts(
+                  "subtitle",
+                  event.target.value
+                )
+              }
+            />
+
+          </div>
+
+
+          <div className="admin-field">
+
+            <label>
+              Image Path
+            </label>
+
+            <input
+              type="text"
+              value={homeData.products?.image || ""}
+              onChange={(event) =>
+                updateProducts(
+                  "image",
+                  event.target.value
+                )
+              }
+            />
+
+          </div>
+
+          <div className="admin-field">
+            <label>Products Section Image</label>
+
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={uploadImage}
+              disabled={busy}
+            />
+
+            {homeData.products?.image && (
+              <div className="products-image-preview">
+                <img
+                  src={homeData.products.image}
+                  alt="Products section preview"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
+
+                <p>{homeData.products.image}</p>
+              </div>
+            )}
+          </div>
+
+
+          <div className="admin-field">
+
+            <label>
+              Description
+            </label>
+
+            <textarea
+              rows="8"
+              value={
+                homeData.products?.description || ""
+              }
+              onChange={(event) =>
+                updateProducts(
+                  "description",
+                  event.target.value
+                )
+              }
+            />
+
+          </div>
+
+          <div className="admin-field">
+
+            <label>
+              CTA Name
+            </label>
+
+            <input
+              type="text"
+              value={homeData.products?.cta_name || ""}
+              onChange={(event) =>
+                updateProducts(
                   "cta_name",
                   event.target.value
                 )
