@@ -15,7 +15,7 @@ const industries = [
   {
     id: 3,
     title: "Power Transformer Manufacturers",
-    image: "/images/business3.jpg",
+    image: "/images/ptm.jpg",
   },
   {
     id: 4,
