@@ -97,6 +97,7 @@ const products1 = [
 
 
 const ProductCard = ({ product, index }) => {
+
   const cardRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -175,6 +176,46 @@ const ProductCard = ({ product, index }) => {
 
 const ProductListing = () => {
 
+  //info page product data
+  const [productData, setProductData] = useState(null);
+
+
+  useEffect(() => {
+
+    loadProductData();
+
+  }, []);
+
+
+  const loadProductData = async () => {
+
+    try {
+
+      const response = await fetch(
+        `/api/home-data`
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+
+        setProductData(
+          result.data.products
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Unable to load Product data:",
+        error
+      );
+
+    }
+
+  };
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -235,10 +276,10 @@ const ProductListing = () => {
           <div className="heading-overlay"></div>
 
           <div className="heading-content">
-            <h1>Our Products</h1>
-            <h2>Transformer Insulation Parts & Accessories</h2>
+            <h1>{productData?.title || "Our Products"}</h1>
+            <h2>{productData?.subtitle || "Transformer Insulation Parts & Accessories"}</h2>
             <p>
-              Delta Trafo Manufacturer manufactures and supplies transformer insulation components for electrical and transformer industry applications. Components can be manufactured according to customer drawings, CAD data, samples, dimensions, material specifications and quantity requirements.
+              {productData?.description || "Delta Trafo Manufacturer manufactures and supplies transformer insulation components for electrical and transformer industry applications. Components can be manufactured according to customer drawings, CAD data, samples, dimensions, material specifications and quantity requirements."} 
             </p>
           </div>
         </section>

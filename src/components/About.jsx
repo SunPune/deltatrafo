@@ -7,49 +7,7 @@ import {
 const API_URL = "";
 
 
-function About() {
-
-  const [aboutData, setAboutData] =
-    useState(null);
-
-
-  useEffect(() => {
-
-    loadAbout();
-
-  }, []);
-
-
-  const loadAbout = async () => {
-
-    try {
-
-      const response = await fetch(
-        `${API_URL}/api/home-data`
-      );
-
-      const result =
-        await response.json();
-
-      if (result.success) {
-
-        setAboutData(
-          result.data.about
-        );
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        "Unable to load About data:",
-        error
-      );
-
-    }
-
-  };
-
+function About({aboutData}) {
 
   if (!aboutData) {
 

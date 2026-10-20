@@ -27,28 +27,30 @@ const features = [
 const WhyDeltaTrafo = () => {
   return (
     <section className="features-section">
-      <div className="features-container">
-        <div className="features-header">
-          <span className="section-subtitle">
-                Why Us
-          </span>
-          <h2>Why Delta Trafo</h2>
-          <p>
-            Our approach combines transformer-industry experience, customized manufacturing capability and defined quality practices.
-          </p>
-        </div>
+      <div className="container WhyDeltaTrafo-container">
+        <div className="features-container">
+          <div className="features-header">
+            <span className="section-subtitle">
+                  Why Us
+            </span>
+            <h2>Why Delta Trafo</h2>
+            <p>
+              Our approach combines transformer-industry experience, customized manufacturing capability and defined quality practices.
+            </p>
+          </div>
 
-        <div className="features-grid">
-          {features.map((feature, index) => (
-            <div className="feature-card" key={index}>
-              <div className="feature-icon">{feature.icon}</div>
+          <div className="features-grid">
+            {features.map((feature, index) => (
+              <div className="feature-card" key={index}>
+                <div className="feature-icon">{feature.icon}</div>
 
-              <div className="feature-content">
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
+                <div className="feature-content">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

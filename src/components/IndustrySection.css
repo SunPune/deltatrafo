@@ -43,6 +43,9 @@
   min-width: 0;
   height: 100%;
 
+  aspect-ratio: 3 / 4;
+  background-repeat: no-repeat;
+
   background-size: cover;
   background-position: center;
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import TopBar from "../components/TopBar";
@@ -8,7 +8,9 @@ import Footer from "../components/Footer";
 
 import "./ProductDetails.css";
 
-const products = {
+const API_URL = "/api/products";
+
+const products1 = {
   "insulation-boards-blocks": {
     name: "Insulation Boards & Blocks",
     shortDescription:
@@ -240,13 +242,67 @@ const products = {
 };
 
 function ProductDetails() {
+
+  const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+  
+    useEffect(() => {
+      let cancelled = false;
+  
+      async function loadProducts() {
+        try {
+          const response = await fetch(API_URL);
+  
+          if (!response.ok) {
+            throw new Error(`Unable to load products (${response.status})`);
+          }
+  
+          const result = await response.json();
+  
+          // Backend returns an object keyed by product slug.
+          const productList = Array.isArray(result)
+            ? result
+            : Object.entries(result).map(([slug, product]) => ({
+                ...product,
+                slug,
+              }));
+  
+          if (!cancelled) {
+            setProducts(productList);
+          }
+        } catch (err) {
+          console.error("Unable to load products:", err);
+  
+          if (!cancelled) {
+            setError("Unable to load products. Please try again later.");
+          }
+        } finally {
+          if (!cancelled) {
+            setLoading(false);
+          }
+        }
+      }
+  
+      loadProducts();
+  
+      return () => {
+        cancelled = true;
+      };
+    }, []);
+
   const { slug } = useParams();
 
-  const product = products[slug];
+  //const product = products[slug];
+  const product = products.find(
+  (item) => item.slug === slug
+);
 
-  const [selectedImage, setSelectedImage] = useState(
-    product?.images?.[0] || ""
-  );
+  const [selectedImage, setSelectedImage] = useState("");
+
+  useEffect(() => {
+    setSelectedImage(product?.images?.[0] || "");
+  }, [product]);
 
   if (!product) {
     return (
@@ -298,10 +354,12 @@ function ProductDetails() {
             </div>
 
             <div className="product-main-image">
-                <img
-                src={selectedImage}
-                alt={product.name}
-                />
+                {selectedImage && (
+                  <img
+                    src={selectedImage}
+                    alt={product?.name || "Product image"}
+                  />
+                )}
             </div>
 
             </div>

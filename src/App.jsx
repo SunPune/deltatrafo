@@ -4,6 +4,8 @@ import {
   Route
 } from "react-router-dom";
 
+import { useEffect, useState } from "react";
+
 import TopBar from "./components/TopBar";
 import Header from "./components/Header";
 import HeroCarousel from "./components/HeroCarousel";
@@ -37,6 +39,35 @@ import "./App.css";
 
 function HomePage() {
 
+  const [aboutData, setAboutData] = useState(null);
+  const [productData, setproductData] = useState(null);
+
+  const loadAbout = async () => {
+
+  try {
+      const response = await fetch(
+        `/api/home-data`
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to load home data");
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        setAboutData(result.data.about);
+        setproductData(result.data.products);
+      }
+    } catch (error) {
+      console.error("Unable to load About data:", error);
+    }
+  };
+
+  useEffect(() => {
+    loadAbout();
+  }, []);
+
   return (
 
     <>
@@ -48,31 +79,9 @@ function HomePage() {
 
         <HeroCarousel />
 
-        <About />
+        <About aboutData={aboutData}/>
 
-        {/* <section
-          id="products"
-          className="placeholder-section"
-        >
-
-          <div className="container">
-
-            <span className="section-label">
-              OUR PRODUCTS
-            </span>
-
-            <h2>
-              Transformer Products
-            </h2>
-
-            <p>
-              Product information will be added here.
-            </p>
-
-          </div>
-
-        </section> */}
-        <ProductSection />
+        <ProductSection productData={productData}/>
 
         <WhyDeltaTrafo />
 
