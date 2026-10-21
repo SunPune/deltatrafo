@@ -2,3 +2,5 @@
 /backend/images/
 /dist/
 /node_modules/
+/backend/data/
+/src/data/
