@@ -23,8 +23,21 @@ app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 
 //upload
-const UPLOAD_DIR = path.join(__dirname, "images");
+const DATA_DIR = path.join(
+  process.cwd(),
+  "public",
+  "assets",
+  "data"
+);
 
+const UPLOAD_DIR = path.join(
+  process.cwd(),
+  "public",
+  "assets",
+  "uploads"
+);
+
+fs.mkdirSync(DATA_DIR, { recursive: true });
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 // Store uploaded images
@@ -63,7 +76,7 @@ const upload = multer({
 });
 
 // Serve uploaded images publicly
-app.use("/images", express.static(UPLOAD_DIR));
+app.use("/uploads", express.static(UPLOAD_DIR));
 
 // Upload API
 app.post("/api/upload", upload.single("image"), (req, res) => {
@@ -73,7 +86,7 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
 
   res.json({
     message: "Image uploaded successfully",
-    imageUrl: `/images/${req.file.filename}`,
+    imageUrl: `/uploads/${req.file.filename}`,
   });
 });
 
@@ -91,8 +104,7 @@ app.use(express.static(FRONTEND_DIR));
 
 //admin home page data file
 const DATA_FILE = path.join(
-  __dirname,
-  "data",
+  DATA_DIR,
   "homeData.json"
 );
 
@@ -184,9 +196,13 @@ function authenticateAdmin(req, res, next) {
 
 //products
 const PRODUCTS_FILE = path.join(
-  __dirname,
-  "data",
+  DATA_DIR,
   "products.json"
+);
+
+const HOME_FILE = path.join(
+  DATA_DIR,
+  "homeData.json"
 );
 
 async function readProducts() {
@@ -199,7 +215,8 @@ async function saveProducts(products) {
   const tempFile = PRODUCTS_FILE + ".tmp";
 
   // Check whether products.json exists
-  await fsPromises.access(PRODUCTS_FILE);
+  //await fsPromises.access(PRODUCTS_FILE);
+  await fsPromises.mkdir(DATA_DIR, { recursive: true });
 
   await fsPromises.writeFile(
     tempFile,

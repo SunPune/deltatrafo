@@ -1,28 +1,13 @@
 
-# Dependencies
 node_modules/
-
-# Build output
 dist/
-
-# Environment variables
 .env
 .env.*
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-
-# Admin-uploaded product images
-public/images/uploads/
+# Admin-uploaded images
 public/assets/uploads/
 
-# Admin-managed JSON files
-backend/data/products.json
-backend/data/homeData.json
+# Admin-managed JSON
 public/assets/data/products.json
 public/assets/data/homeData.json
-
-# OS files
-.DS_Store
-Thumbs.db
+backend/data/homeData.json
