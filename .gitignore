@@ -8,6 +8,6 @@ dist/
 public/assets/uploads/
 
 # Admin-managed JSON
-#public/assets/data/products.json
-#public/assets/data/homeData.json
+public/assets/data/products.json
+public/assets/data/homeData.json
 backend/data/homeData.json

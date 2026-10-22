@@ -36,17 +36,23 @@ export default function AdminProducts() {
   );
 
 
-  // ------------------------------------------------
+   // ------------------------------------------------
   // Check login
   // ------------------------------------------------
 
   useEffect(() => {
-  if (token) {
-    loadProducts().catch((error) => {
-      setMessage(error.message);
-    });
-  }
-}, [token]);
+
+    if (!token) {
+
+      navigate("/admin/login");
+
+      return;
+
+    }
+
+    loadHomeData();
+
+  }, []);
 
   const [products, setProducts] = useState({});
   const [form, setForm] = useState(emptyProduct);
