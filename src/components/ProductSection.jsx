@@ -187,7 +187,7 @@ function ProductSection({productData}) {
 
               {sliderProducts.map((product, index) => (
                 <div className="product-slide" style={{ flex: `0 0 ${100 / cardsToShow}%` }} key={`${product.id}-${index}`}>
-                  <a href={`/products/${product.id}`} className="product-link"><div className="product-card">
+                  <a href={`/products/${createSlug(product.name)}`} className="product-link"><div className="product-card">
 
                     <div className="product-image">
                       <img src={product.images?.[0]} alt={product.name} loading="lazy" />
