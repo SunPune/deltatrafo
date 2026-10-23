@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/build.mjs",
+    "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
     "start": "node backend/server.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
     "@fortawesome/react-fontawesome": "^3.5.0",
     "cors": "^2.8.6",

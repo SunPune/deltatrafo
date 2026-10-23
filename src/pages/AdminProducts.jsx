@@ -108,7 +108,10 @@ export default function AdminProducts() {
 
       const response = await fetch(url, {
         method: editingSlug ? "PUT" : "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           ...product,
           ...(editingSlug ? {} : { slug }),
@@ -145,7 +148,10 @@ export default function AdminProducts() {
     try {
       const response = await fetch(
         `${API_URL}/${encodeURIComponent(slug)}`,
-        { method: "DELETE" }
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       const result = await response.json();
