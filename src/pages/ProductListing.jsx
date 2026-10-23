@@ -276,10 +276,10 @@ const ProductListing = () => {
           <div className="heading-overlay"></div>
 
           <div className="heading-content">
-            <h1>{productData?.title || "Our Products"}</h1>
-            <h2>{productData?.subtitle || "Transformer Insulation Parts & Accessories"}</h2>
+            <h1>{productData?.title || ""}</h1>
+            <h2>{productData?.subtitle || ""}</h2>
             <p>
-              {productData?.description || "Delta Trafo Manufacturer manufactures and supplies transformer insulation components for electrical and transformer industry applications. Components can be manufactured according to customer drawings, CAD data, samples, dimensions, material specifications and quantity requirements."} 
+              {productData?.description || ""} 
             </p>
           </div>
         </section>
