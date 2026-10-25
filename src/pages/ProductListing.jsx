@@ -278,9 +278,11 @@ const ProductListing = () => {
           <div className="heading-content">
             <h1>{productData?.title || ""}</h1>
             <h2>{productData?.subtitle || ""}</h2>
-            <p>
-              {productData?.description || ""} 
-            </p>
+            {productData?.showonProducts && (
+              <p>
+                {productData.description}
+              </p>
+            )}
           </div>
         </section>
 

@@ -919,6 +919,27 @@ function AdminDashboard() {
 
           </div>
 
+          <div className="admin-checkbox">
+
+            <input
+              type="checkbox"
+              checked={
+                homeData.products?.showonProducts
+              }
+              onChange={(event) =>
+                updateProducts(
+                  "showonProducts",
+                  event.target.checked
+                )
+              }
+            />
+
+            <label>
+              Show description on Products page
+            </label>
+
+          </div>
+
           <div className="admin-field">
 
             <label>
