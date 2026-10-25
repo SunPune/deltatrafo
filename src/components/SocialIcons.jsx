@@ -12,7 +12,7 @@ const SocialIcons = () => {
   return (
     <div className="social-icons">
       <a
-        href="https://instagram.com/"
+        {/* href="https://instagram.com/" */}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
@@ -21,7 +21,7 @@ const SocialIcons = () => {
       </a>
 
       <a
-        href="https://facebook.com/"
+        {/* href="https://facebook.com/" */}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Facebook"
@@ -30,7 +30,7 @@ const SocialIcons = () => {
       </a>
 
       <a
-        href="https://wa.me/919999999999"
+        href="https://wa.me/918454997117"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"
@@ -39,7 +39,7 @@ const SocialIcons = () => {
       </a>
 
       <a
-        href="https://linkedin.com/"
+        {/* href="https://linkedin.com/" */}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
@@ -48,7 +48,7 @@ const SocialIcons = () => {
       </a>
 
       <a
-        href="https://youtube.com/"
+        {/* href="https://youtube.com/" */}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="YouTube"
