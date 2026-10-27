@@ -7,8 +7,9 @@ import Footer from "../components/Footer";
 
 import "./Industries.css";
 
+import industries from "../components/industriesData";
 
-const industries = [
+const industries1 = [
   {
     id: 1,
     title: "Transformer Manufacturers",

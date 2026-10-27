@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./IndustrySection.css";
 
-const industries = [
+import industries from "./industriesData";
+
+const industries1 = [
   {
     id: 1,
     title: "Transformer Manufacturers",
