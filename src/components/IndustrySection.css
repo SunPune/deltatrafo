@@ -59,7 +59,7 @@
 
 /* Expanded card */
 .industry-section .industry-card.active {
-  flex: 5;
+  flex: 3;
 }
 
 /* Overlay */
