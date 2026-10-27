@@ -1,33 +1,14 @@
-
 node_modules/
 dist/
 .env
 .env.*
 
-public/assets/uploads/
-!public/assets/uploads/.gitkeep
-/public/assets/uploads/*
-!/public/assets/uploads/.gitkeep
-
-# Admin-managed JSON
-public/assets/data/products.json
-public/assets/data/homeData.json
-!public/assets/data/.gitkeep
-/public/assets/data/
-!/public/assets/data/.gitkeep
-
-
-# Admin-managed runtime data and uploads — never commit these files.
+# Admin-managed runtime JSON and uploaded images: never commit these.
 /public/assets/delta-storage/
-public/assets/delta-storage/
 
-# Legacy runtime data/upload locations; keep ignored during migration.
+# Legacy runtime locations (keep untracked while migrating old data).
 /public/assets/uploads/*
 !/public/assets/uploads/.gitkeep
 /public/assets/data/products.json
 /public/assets/data/homeData.json
-
-public/assets/uploads/*
-!public/assets/uploads/.gitkeep
-public/assets/data/products.json
-public/assets/data/homeData.json
+!/public/assets/data/.gitkeep
