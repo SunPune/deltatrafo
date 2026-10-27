@@ -19,14 +19,23 @@ app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 
 // --------------------------------------------------
-// Persistent storage OUTSIDE the project
-// (survives git pull / npm run build / redeploy)
-// Set STORAGE_PATH in cPanel, e.g. /home/YOURUSER/app-storage
+// GoDaddy persistent storage
+//
+// GoDaddy Node.js Hosting recommends public/assets for files that must
+// survive deployments. Keep runtime data in a dedicated, Git-ignored
+// subfolder there. Do NOT store live data in dist/.
+//
+// If STORAGE_PATH is explicitly configured in GoDaddy Secrets, it takes
+// precedence. Otherwise use public/assets/delta-storage.
 // --------------------------------------------------
+
+const PROJECT_ROOT = process.cwd();
+const LEGACY_DATA_DIR = path.join(PROJECT_ROOT, "public", "assets", "data");
+const LEGACY_UPLOAD_DIR = path.join(PROJECT_ROOT, "public", "assets", "uploads");
 
 const STORAGE_DIR =
   process.env.STORAGE_PATH ||
-  path.join(__dirname, "..", "public", "assets", "delta-storage");
+  path.join(PROJECT_ROOT, "public", "assets", "delta-storage");
 
 const DATA_DIR = path.join(STORAGE_DIR, "data");
 const UPLOAD_DIR = path.join(STORAGE_DIR, "uploads");
@@ -35,13 +44,39 @@ const SEED_DIR = path.join(__dirname, "seed");
 fs.mkdirSync(DATA_DIR, { recursive: true });
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
-// Copy default data only if the live file does not exist yet
+// One-time-safe image migration: copy legacy images only when a same-named
+// file is not already present in persistent storage. Never overwrite uploads.
+if (fs.existsSync(LEGACY_UPLOAD_DIR)) {
+  for (const entry of fs.readdirSync(LEGACY_UPLOAD_DIR, { withFileTypes: true })) {
+    if (!entry.isFile()) continue;
+    const source = path.join(LEGACY_UPLOAD_DIR, entry.name);
+    const target = path.join(UPLOAD_DIR, entry.name);
+    if (!fs.existsSync(target)) {
+      fs.copyFileSync(source, target);
+    }
+  }
+}
+
+// One-time migration: copy current JSON files into persistent storage only
+// when the destination does not already exist. Never overwrite live data.
 ["homeData.json", "products.json"].forEach((file) => {
   const target = path.join(DATA_DIR, file);
+  const legacy = path.join(LEGACY_DATA_DIR, file);
   const seed = path.join(SEED_DIR, file);
-  if (!fs.existsSync(target) && fs.existsSync(seed)) {
-    fs.copyFileSync(seed, target);
-    console.log(`Seeded ${file}`);
+
+  if (!fs.existsSync(target)) {
+    if (fs.existsSync(legacy)) {
+      fs.copyFileSync(legacy, target);
+      console.log(`Migrated existing ${file} to runtime storage`);
+    } else if (fs.existsSync(seed)) {
+      fs.copyFileSync(seed, target);
+      console.log(`Seeded ${file} in runtime storage`);
+    } else {
+      console.error(
+        `MISSING DATA FILE: ${file}. No runtime, legacy, or seed copy exists. ` +
+        `Restore this file from backup or add it to backend/seed before deployment.`
+      );
+    }
   }
 });
 
@@ -115,10 +150,13 @@ const upload = multer({
   },
 });
 
-// Serve uploaded images publicly
-app.use("/uploads", express.static(UPLOAD_DIR));
-// Backward compatibility for old image paths stored in JSON
-app.use("/assets/uploads", express.static(UPLOAD_DIR));
+// Serve images from persistent storage first.
+// Fall back to the old uploads folder so existing image URLs keep working
+// while the old files are migrated. New uploads go to UPLOAD_DIR.
+app.use("/uploads", express.static(UPLOAD_DIR, { fallthrough: true }));
+app.use("/uploads", express.static(LEGACY_UPLOAD_DIR, { fallthrough: true }));
+app.use("/assets/uploads", express.static(UPLOAD_DIR, { fallthrough: true }));
+app.use("/assets/uploads", express.static(LEGACY_UPLOAD_DIR, { fallthrough: true }));
 
 // Upload API (admin only)
 app.post(
@@ -446,4 +484,9 @@ app.use((err, req, res, next) => {
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`DeltaTrafo API running on port ${PORT}`);
   console.log(`Storage directory: ${STORAGE_DIR}`);
+  console.log(`Data directory: ${DATA_DIR}`);
+  console.log(`Uploads directory: ${UPLOAD_DIR}`);
+  console.log(`homeData.json exists: ${fs.existsSync(DATA_FILE)}`);
+  console.log(`products.json exists: ${fs.existsSync(PRODUCTS_FILE)}`);
+  console.log(`STORAGE_PATH explicitly configured: ${Boolean(process.env.STORAGE_PATH)}`);
 });
