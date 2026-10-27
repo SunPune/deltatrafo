@@ -264,6 +264,10 @@ const ProductListing = () => {
     };
   }, []);
 
+  const style = productData?.image
+    ? { backgroundImage: `url("${productData.image}")` }
+    : undefined;
+
   return (
     <>
       <TopBar />
@@ -272,7 +276,7 @@ const ProductListing = () => {
       <main className="product-page">
 
         {/* Page Header */}
-        <section className="heading-section">
+        <section className="heading-section" style={style}>
           <div className="heading-overlay"></div>
 
           <div className="heading-content">
