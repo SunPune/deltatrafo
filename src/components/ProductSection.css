@@ -167,7 +167,7 @@
   }
 
   .product-image {
-    height: fit-content;
+    height: 330px;
   }
 }
 
@@ -225,7 +225,7 @@
 
 .product-image {
   width: 100%;
-  height: fit-content;
+  height: 330px;
   overflow: hidden;
 }
 
@@ -378,7 +378,7 @@
   }
 
   .product-image {
-    height: fit-content;
+    height: 330px;
   }
 
   .product-content {
