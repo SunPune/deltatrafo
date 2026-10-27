@@ -195,7 +195,7 @@
   }
 
   .industry-section .industry-card.active {
-    flex: 5;
+    flex: 15;
   }
 
   .industry-section .industry-card:not(.active) .industry-content h2 {

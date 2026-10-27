@@ -332,10 +332,10 @@
 
   .process-section {
     padding: 20px 0;
-    height: 700vh;
   }
 
   .process-sticky {
+    height: unset;
     min-height: 650px;
   }
 
