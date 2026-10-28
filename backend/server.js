@@ -79,15 +79,15 @@ function initializeJsonFile(file, fallbackValue) {
   );
 }
 
-initializeJsonFile("homeData.json", {
+initializeJsonFile("home_data.json", {
   banners: [],
   about: {},
 });
 
-initializeJsonFile("products.json", {});
+initializeJsonFile("products_data.json", {});
 
-const DATA_FILE = path.join(DATA_DIR, "homeData.json");
-const PRODUCTS_FILE = path.join(DATA_DIR, "products.json");
+const DATA_FILE = path.join(DATA_DIR, "home_data.json");
+const PRODUCTS_FILE = path.join(DATA_DIR, "products_data.json");
 
 // --------------------------------------------------
 // Admin authentication
@@ -287,7 +287,7 @@ async function readProducts() {
       Array.isArray(products)
     ) {
       throw new Error(
-        "products.json must contain a JSON object keyed by slug"
+        "products_data.json must contain a JSON object keyed by slug"
       );
     }
 
