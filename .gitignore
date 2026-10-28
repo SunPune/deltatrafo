@@ -3,12 +3,15 @@ dist/
 .env
 .env.*
 
-# Admin-managed runtime JSON and uploaded images: never commit these.
-/public/assets/delta-storage/
+/public/assets/delta-storage/uploads/*
+!/public/assets/delta-storage/uploads/.gitkeep
 
-# Legacy runtime locations (keep untracked while migrating old data).
-/public/assets/uploads/*
-!/public/assets/uploads/.gitkeep
-/public/assets/data/products.json
-/public/assets/data/homeData.json
-!/public/assets/data/.gitkeep
+/public/assets/delta-storage/data/*
+!/public/assets/delta-storage/data/.gitkeep
+
+
+public/assets/delta-storage/uploads/*
+!public/assets/delta-storage/uploads/.gitkeep
+
+public/assets/delta-storage/data/*
+!public/assets/delta-storage/data/.gitkeep
