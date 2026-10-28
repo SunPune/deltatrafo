@@ -25,7 +25,7 @@ app.use(express.json({ limit: "1mb" }));
 
 const STORAGE_DIR =
   process.env.STORAGE_PATH ||
-  path.join(__dirname, "..", "public", "assets", "delta-storage");
+  path.join(__dirname, "..", "public", "assets", "delta-storages");
 
 const DATA_DIR = path.join(STORAGE_DIR, "data");
 const UPLOAD_DIR = path.join(STORAGE_DIR, "uploads");
