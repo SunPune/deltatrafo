@@ -15,7 +15,7 @@ function copyPublicAssetsExceptLiveStorage() {
       const liveStorageDir = path.resolve(
         publicDir,
         'assets',
-        'delta-storage'
+        'delta-storages'
       );
 
       await mkdir(outDir, { recursive: true });
