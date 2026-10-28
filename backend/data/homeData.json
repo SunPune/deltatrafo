@@ -1,43 +1,34 @@
 {
-  "banners": [
-    {
-      "id": 1,
-      "image": "/images/DeltaTrafo_Banner_01_Transformer_Insulation.jpeg",
-      "title": "Transformer Insulation Parts & Accessories",
-      "description": "Precision-manufactured insulation components for transformer and electrical industry applications.",
-      "showText": false,
-      "textPosition": "bottom",
-      "buttonText": "Learn More",
-      "buttonLink": "/about",
-      "buttonColor": "#FF5733",
-      "buttonTextColor": "#FFFFFF",
-      "buttonHiden": false,
-      "mob_image": "/images/DeltaTrafo_Mobile_Banner_01_Transformer_Insulation.jpg"
-    },
-    {
-      "id": 1790428088977,
-      "image": "/images/DeltaTrafo_Banner_02_Insulation_Accessories.jpeg",
-      "title": "New Banner",
-      "description": "Enter banner description",
-      "showText": false,
-      "textPosition": "bottom",
-      "buttonHiden": false,
-      "mob_image": "/images/DeltaTrafo_Mobile_Banner_02_Insulation_Accessories.jpg"
+        "banners": [
+            {
+                "id": 1,
+                "image": "/images/desktop-banner-1.png",
+                "title": "Transformer Insulation Parts & Accessories",
+                "description": "Precision-manufactured insulation components for transformer and electrical industry applications.",
+                "showText": false,
+                "textPosition": "bottom",
+                "buttonText": "Learn More",
+                "buttonLink": "/about",
+                "buttonColor": "#FF5733",
+                "buttonTextColor": "#FFFFFF",
+                "buttonHiden": false,
+                "mob_image": "/images/mobile-banner-home-1.png"
+            }
+        ],
+        "about": {
+            "title": "About DeltaTrafo",
+            "subtitle": "Specialized Manufacturing of Transformer Insulation Parts & Accessories",
+            "image": "/images/company-overview2.jpg",
+            "description": "Delta Trafo Manufacturer is a specialized manufacturer of transformer insulation parts and components for the electrical and transformer industry. With 30 years of experience in the transformer industry, we focus on reliable, accurately manufactured and application-oriented insulation components.",
+            "CTA Name": "",
+            "cta_name": "Know More"
+        },
+        "products": {
+            "title": "Our Products",
+            "subtitle": "Transformer Insulation Parts & Accessories",
+            "description": "Delta Trafo Manufacturer manufactures and supplies transformer insulation components for electrical and transformer industry applications. Components can be manufactured according to customer drawings, CAD data, samples, dimensions, material specifications and quantity requirements.",
+            "cta_name": "View All Products",
+            "image": "/uploads/bb0d50e2-3254-4d7c-b4a2-aee4dbd19ffd.jpg",
+            "showonProducts": false
+        }
     }
-  ],
-  "about": {
-    "title": "About DeltaTrafo",
-    "subtitle": "Specialized Manufacturing of Transformer Insulation Parts & Accessories",
-    "image": "/images/about-deltatrafo.jpg",
-    "description": "Delta Trafo Manufacturer is a specialized manufacturer of transformer insulation parts and components for the electrical and transformer industry. With 30 years of experience in the transformer industry, we focus on reliable, accurately manufactured and application-oriented insulation components.",
-    "CTA Name": "",
-    "cta_name": "Know More"
-  },
-  "products": {
-    "title": "Our Products",
-    "subtitle": "Transformer Insulation Parts & Accessories",
-    "description": "Delta Trafo Manufacturer manufactures and supplies transformer insulation components for electrical and transformer industry applications. Components can be manufactured according to customer drawings, CAD data, samples, dimensions, material specifications and quantity requirements.",
-    "cta_name": "View All Products",
-    "image": "/images/65e150a7-64d4-459e-9713-e6113cb051c1.jpeg"
-  }
-}
