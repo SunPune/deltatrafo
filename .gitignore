@@ -3,15 +3,4 @@ dist/
 .env
 .env.*
 
-/public/assets/delta-storage/uploads/*
-!/public/assets/delta-storage/uploads/.gitkeep
 
-/public/assets/delta-storage/data/*
-!/public/assets/delta-storage/data/.gitkeep
-
-
-public/assets/delta-storage/uploads/*
-!public/assets/delta-storage/uploads/.gitkeep
-
-public/assets/delta-storage/data/*
-!public/assets/delta-storage/data/.gitkeep
