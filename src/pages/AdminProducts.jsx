@@ -73,9 +73,24 @@ export default function AdminProducts() {
   useEffect(() => {
     loadProducts().catch(error => setMessage(error.message));
   }, []);
+  
+  function createSlugByName(name) {
+      return name
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+  }
 
   function updateField(field, value) {
     setForm(previous => ({ ...previous, [field]: value }));
+    if (field === "name" && !editingSlug) {
+      setForm(previous => ({
+        ...previous,
+        slug: createSlugByName(value),
+      }));
+    }
   }
 
   function editProduct(slug) {
@@ -295,7 +310,7 @@ async function uploadImage(event, index) {
       <h2>{editingSlug ? "Edit Product" : "Add Product"}</h2>
 
       <form onSubmit={saveProduct}>
-        <label>
+        {/* <label>
           Product URL slug
           <input
             value={form.slug}
@@ -304,7 +319,7 @@ async function uploadImage(event, index) {
             placeholder="insulation-boards-blocks"
             required
           />
-        </label>
+        </label> */}
 
         <label>
           Product Name

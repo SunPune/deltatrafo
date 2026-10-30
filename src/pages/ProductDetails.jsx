@@ -10,237 +10,6 @@ import "./ProductDetails.css";
 
 const API_URL = "/api/products";
 
-const products1 = {
-  "insulation-boards-blocks": {
-    name: "Insulation Boards & Blocks",
-    shortDescription:
-      "",
-    description:
-      "Transformer insulation boards and blocks manufactured according to specified dimensions and material requirements.",
-    images: [
-      "/images/product-1.jpg",
-      "/images/product-2.jpg",
-      "/images/product-3.jpg",
-    ],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-
-  "rings-end-rings": {
-    name: "Rings & End Rings",
-    shortDescription:
-      "Reliable power transformers engineered for efficient high-voltage applications.",
-    description:
-      "Precisely manufactured rings and end rings for transformer insulation applications.",
-    images: [
-      "/images/product-1.jpg",
-      "/images/product-2.jpg",
-      "/images/product-3.jpg",
-    ],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "cylinders": {
-    name: "Cylinders",
-    description: "Insulation cylinders manufactured to required dimensions, drawings and material specifications.",
-    images: ["/images/product-3.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-    "spacers": {
-      name: "Spacers",
-      description: "Transformer insulation spacers manufactured for specified applications and dimensional requirements.",
-      images: ["/images/product-4.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "barriers": {
-      name: "Barriers",
-      name: "Barriers",
-      description: "Insulation barriers manufactured according to transformer design and assembly requirements.",
-      images: ["/images/product-5.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "supports": {
-      name: "Supports",
-      description: "Insulation support components for transformer assembly applications.",
-      image: ["/images/product-6.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "washers": {
-      name: "Washers",
-      description: "Insulation washers manufactured to required dimensions and specifications.",
-      image: ["/images/product-7.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "angle-rings": {
-      name: "Angle Rings",
-      description: "Angle rings manufactured for transformer insulation applications.",
-      images: ["/images/product-8.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-
-
-  "radial-axial-spacers": {
-    name: "Radial & Axial Spacers",
-    description: "Spacers manufactured according to application-specific dimensional requirements.",
-    images: ["/images/product-8.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "insulation-strips": {
-     name: "Insulation Strips",
-    description: "Insulation strips manufactured from specified insulation materials and dimensions.",
-    images: ["/images/product-8.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "winding-insulation": {
-      name: "Winding Insulation",
-    description: "Components for transformer winding insulation applications.",
-    images: ["/images/product-8.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "core-insulation-components": {
-      name: "Core Insulation Components",
-    description: "Components for transformer core insulation applications.",
-    images: ["/images/product-8.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "clamping-components": {
-      name: "Clamping Components",
-    description: "Insulation components for transformer clamping applications.",
-    images: ["/images/product-8.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-  "customized-insulation-parts": {
-      name: "Customized Insulation Parts",
-      description: "Components manufactured according to customer drawings, CAD data, samples, dimensions, material specifications and quantities.",
-      images: ["/images/product-8.jpg"],
-    specifications: [
-      ["Material", "Iron"],
-      ["Dimensions", "10x10"],
-      ["Thickness / Size", "11 KV"],
-      ["Drawing Reference", "50 Hz"],
-      ["Tolerance, where applicable", "Three Phase"],
-      ["Finish / Surface Requirement, where applicable", "ONAN / ONAF"],
-      ["Application", "ONAN / ONAF"],
-      ["Customization Availability", "ONAN / ONAF"],
-    ],
-  },
-};
-
 function ProductDetails() {
 
   const [products, setProducts] = useState([]);
@@ -381,21 +150,25 @@ function ProductDetails() {
                 {product.description}
             </p>
 
-            <h3>Key Specifications</h3>
+            {product.specifications?.length > 0 && (
+                <>
+                    <h3>Key Specifications</h3>
 
-            <div className="product-specifications">
-                {product.specifications.map(([label, value], index) => (
-                <div className="specification-row" key={index}>
-                    <div className="specification-label">
-                    {label}
-                    </div>
+                    <div className="product-specifications">
+                        {product.specifications.map(([label, value], index) => (
+                            <div className="specification-row" key={index}>
+                                <div className="specification-label">
+                                    {label}
+                                </div>
 
-                    <div className="specification-value">
-                    {value}
+                                <div className="specification-value">
+                                    {value}
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                </div>
-                ))}
-            </div>
+                </>
+            )}
 
             <Link
                 to="/contact-us"

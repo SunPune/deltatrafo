@@ -136,7 +136,7 @@ const ProductCard = ({ product, index }) => {
       .replace(/-+/g, "-");
   };
 
-  const slug = createSlug(product.name);
+  const slug = product.slug || createSlug(product.name);
 
   return (
     <div
