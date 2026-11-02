@@ -132,12 +132,30 @@ async function ensureDatabaseTables() {
   }
 }
 
-// ==================================================
+// // ==================================================
+// // AWS S3 CONFIGURATION
+// // ==================================================
+
+// const s3 = new S3Client({
+//   region: process.env.AWS_REGION
+// });
+
+// const S3_BUCKET = process.env.S3_BUCKET_NAME;
+
+// const S3_PUBLIC_BASE_URL =
+//   process.env.S3_PUBLIC_BASE_URL ||
+//   `https://${S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com`;
+
 // AWS S3 CONFIGURATION
 // ==================================================
 
 const s3 = new S3Client({
-  region: process.env.AWS_REGION
+  region: process.env.AWS_REGION,
+
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  }
 });
 
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
@@ -145,6 +163,17 @@ const S3_BUCKET = process.env.S3_BUCKET_NAME;
 const S3_PUBLIC_BASE_URL =
   process.env.S3_PUBLIC_BASE_URL ||
   `https://${S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com`;
+
+if (
+  !process.env.AWS_ACCESS_KEY_ID ||
+  !process.env.AWS_SECRET_ACCESS_KEY ||
+  !process.env.AWS_REGION ||
+  !S3_BUCKET
+) {
+  console.error("AWS S3 configuration is incomplete.");
+} else {
+  console.log("AWS S3 configuration loaded successfully.");
+}
 
 // ==================================================
 // JSON MIGRATION
