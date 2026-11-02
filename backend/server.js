@@ -9,6 +9,10 @@ const path = require("path");
 const crypto = require("crypto");
 const multer = require("multer");
 const mysql = require("mysql2/promise");
+const {
+  S3Client,
+  PutObjectCommand
+} = require("@aws-sdk/client-s3");
 
 require("dotenv").config();
 
@@ -127,6 +131,20 @@ async function ensureDatabaseTables() {
     connection.release();
   }
 }
+
+// ==================================================
+// AWS S3 CONFIGURATION
+// ==================================================
+
+const s3 = new S3Client({
+  region: process.env.AWS_REGION
+});
+
+const S3_BUCKET = process.env.S3_BUCKET_NAME;
+
+const S3_PUBLIC_BASE_URL =
+  process.env.S3_PUBLIC_BASE_URL ||
+  `https://${S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com`;
 
 // ==================================================
 // JSON MIGRATION
@@ -314,9 +332,12 @@ const storage = multer.diskStorage({
 
 });
 
-const upload = multer({
+// ==================================================
+// AWS S3 IMAGE UPLOAD
+// ==================================================
 
-  storage,
+const upload = multer({
+  storage: multer.memoryStorage(),
 
   limits: {
     fileSize: 5 * 1024 * 1024
@@ -336,11 +357,70 @@ const upload = multer({
 
     cb(new Error("Only JPG, PNG and WebP images are allowed"));
   }
-
 });
 
-app.use("/uploads", express.static(UPLOAD_DIR));
-app.use("/assets/uploads", express.static(UPLOAD_DIR));
+// Upload image to AWS S3.
+app.post(
+  "/api/upload",
+  authenticateAdmin,
+  upload.single("image"),
+  async (req, res) => {
+
+    try {
+
+      if (!req.file) {
+        return res.status(400).json({
+          success: false,
+          message: "Please select an image"
+        });
+      }
+
+      const ext = path.extname(
+        req.file.originalname
+      ).toLowerCase();
+
+      const fileName = crypto.randomUUID() + ext;
+
+      const s3Key = `products/${fileName}`;
+
+      // Upload image to S3.
+      await s3.send(
+        new PutObjectCommand({
+          Bucket: S3_BUCKET,
+          Key: s3Key,
+          Body: req.file.buffer,
+          ContentType: req.file.mimetype,
+          CacheControl: "public, max-age=31536000"
+        })
+      );
+
+      // Generate public image URL.
+      const imageUrl =
+        `${S3_PUBLIC_BASE_URL.replace(/\/+$/, "")}/${s3Key}`;
+
+      res.status(200).json({
+        success: true,
+        message: "Image uploaded successfully",
+        imageUrl: imageUrl,
+        imageKey: s3Key
+      });
+
+    } catch (error) {
+
+      console.error("S3 upload error:", error);
+
+      res.status(500).json({
+        success: false,
+        message: "Unable to upload image to S3"
+      });
+
+    }
+
+  }
+);
+
+// app.use("/uploads", express.static(UPLOAD_DIR));
+// app.use("/assets/uploads", express.static(UPLOAD_DIR));
 
 app.post(
   "/api/upload",
@@ -358,7 +438,7 @@ app.post(
     res.json({
       success: true,
       message: "Image uploaded successfully",
-      imageUrl: `/uploads/${req.file.filename}`
+      imageUrl: `${S3_PUBLIC_BASE_URL.replace(/\/+$/, "")}/products/${req.file.filename}`
     });
 
   }
