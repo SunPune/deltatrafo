@@ -411,7 +411,7 @@ app.post(
 
       res.status(500).json({
         success: false,
-        message: "Unable to upload image to S3"
+        message: "Unable to upload image to S3, S3 BUCKET: " + S3_BUCKET + " && AWS REGION: " + process.env.AWS_REGION + " AWS_ACCESS_KEY_ID: " + process.env.AWS_ACCESS_KEY_ID + " AWS_SECRET_ACCESS_KEY: " + process.env.AWS_SECRET_ACCESS_KEY,
       });
 
     }
