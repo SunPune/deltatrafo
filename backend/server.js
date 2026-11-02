@@ -1,6 +1,8 @@
 
 "use strict";
 
+// 1. Load environment variables FIRST before anything else logs or initializes
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
@@ -13,8 +15,6 @@ const {
   S3Client,
   PutObjectCommand
 } = require("@aws-sdk/client-s3");
-
-require("dotenv").config();
 
 const app = express();
 
