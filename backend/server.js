@@ -138,7 +138,11 @@ async function ensureDatabaseTables() {
 // ==================================================
 
 const s3 = new S3Client({
-  region: process.env.AWS_REGION
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AI_AK,
+    secretAccessKey: process.env.SA_KA
+  }
 });
 
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
@@ -413,7 +417,7 @@ app.post(
 
       res.status(500).json({
         success: false,
-        message: "Unable to upload image to S3, S3 BUCKET: " + S3_BUCKET + " && AWS REGION: " + process.env.AWS_REGION + " AWS_ACCESS_KEY_ID: " + process.env.AWS_ACCESS_KEY_ID + " AWS_SECRET_ACCESS_KEY: " + process.env.AWS_SECRET_ACCESS_KEY,
+        message: "Unable to upload image to S3, S3 BUCKET: " + S3_BUCKET + " && AWS REGION: " + process.env.AWS_REGION + " AWS_ACCESS_KEY_ID: " + process.env.AI_AK + " AWS_SECRET_ACCESS_KEY: " + process.env.process.env.SA_KA,
       });
 
     }
