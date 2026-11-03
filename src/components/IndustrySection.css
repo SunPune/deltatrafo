@@ -185,14 +185,14 @@
   }
 
   .industry-section .industry-wrapper {
-    height: 800px;
+    height: 915px;
     flex-direction: column;
     gap: 8px;
   }
 
   .industry-section .industry-card {
     width: 100%;
-    min-height: 85px;
+    min-height: 80px;
     flex: 1;
   }
 
