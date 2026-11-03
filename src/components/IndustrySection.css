@@ -185,23 +185,26 @@
   }
 
   .industry-section .industry-wrapper {
-    height: 600px;
+    height: 800px;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
   .industry-section .industry-card {
     width: 100%;
+    min-height: 85px;
+    flex: 1;
   }
 
   .industry-section .industry-card.active {
+    min-height: 450px;
     flex: 15;
   }
 
   .industry-section .industry-card:not(.active) .industry-content h2 {
     writing-mode: horizontal-tb;
     transform: none;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .industry-section .industry-content {
