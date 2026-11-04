@@ -189,12 +189,12 @@ const S3_BUCKET = process.env.S3_BUCKET_NAME;
 const s3 = new S3Client({
   region: AWS_REGION,
 
-  ...(process.env.AWS_ACCESS_KEY_ID &&
-  process.env.AWS_SECRET_ACCESS_KEY
+  ...(process.env.AI_AK &&
+  process.env.SA_KA
     ? {
         credentials: {
-          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+          accessKeyId: process.env.AI_AK,
+          secretAccessKey: process.env.SA_KA
         }
       }
     : {})
@@ -219,8 +219,8 @@ function validateS3Config() {
   }
 
   if (
-    !process.env.AWS_ACCESS_KEY_ID ||
-    !process.env.AWS_SECRET_ACCESS_KEY
+    !process.env.AI_AK ||
+    !process.env.SA_KA
   ) {
     console.warn(
       "AWS credentials not explicitly configured. Checking default AWS credentials."
