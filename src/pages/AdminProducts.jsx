@@ -248,6 +248,13 @@ async function uploadImage(event, index) {
       throw new Error(result.message || "Image upload failed");
     }
 
+    // Accept either imageUrl or path from the backend
+    const imageUrl = result.imageUrl || result.path || result.url;
+
+    if (!imageUrl) {
+      throw new Error("Image URL is missing from server response");
+    }
+
     updateImage(index, result.imageUrl);
     setMessage("Image uploaded successfully");
   } catch (error) {

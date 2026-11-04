@@ -3,7 +3,7 @@
   width: 100%;
 
   /* 7 items = one complete scroll round */
-  height: 100%;
+  height: 700vh;
 
   background: #f7f8fa;
 }
@@ -17,7 +17,7 @@
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   min-height: 650px;
   display: flex;
   align-items: center;
@@ -331,11 +331,10 @@
 @media (max-width: 768px) {
 
   .process-section {
-    padding: 20px 0;
+    height: 700vh;
   }
 
   .process-sticky {
-    height: unset;
     min-height: 650px;
   }
 

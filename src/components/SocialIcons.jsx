@@ -11,23 +11,29 @@ import {
 const SocialIcons = () => {
   return (
     <div className="social-icons">
-      <a
+      {/* <a
         href="https://instagram.com/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
       >
         <FontAwesomeIcon icon={faInstagram} />
-      </a>
+      </a> */}
+      <span aria-label="Instagram">
+        <FontAwesomeIcon icon={faInstagram} />
+      </span>
 
-      <a
-        href="https://facebook.com/"
+      {/* <a
+        href="#"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Facebook"
       >
         <FontAwesomeIcon icon={faFacebookF} />
-      </a>
+      </a> */}
+      <span aria-label="Facebook">
+        <FontAwesomeIcon icon={faFacebookF} />
+      </span>
 
       <a
         href="https://wa.me/918454997117"
@@ -38,23 +44,29 @@ const SocialIcons = () => {
         <FontAwesomeIcon icon={faWhatsapp} />
       </a>
 
-      <a
+      {/* <a
         href="https://linkedin.com/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
       >
         <FontAwesomeIcon icon={faLinkedinIn} />
-      </a>
+      </a> */}
+      <span aria-label="LinkedIn">
+        <FontAwesomeIcon icon={faLinkedinIn} />
+      </span>
 
-      <a
+      {/* <a
         href="https://youtube.com/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="YouTube"
       >
         <FontAwesomeIcon icon={faYoutube} />
-      </a>
+      </a> */}
+      <span aria-label="YouTube">
+        <FontAwesomeIcon icon={faYoutube} />
+      </span>
     </div>
   );
 };
