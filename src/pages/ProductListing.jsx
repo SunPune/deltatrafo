@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import usePageMeta from "../hooks/usePageMeta";
 
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
@@ -97,6 +98,11 @@ const products1 = [
 
 
 const ProductCard = ({ product, index }) => {
+
+  usePageMeta(
+    "Products | Delta Trafo",
+    "Delta Trafo specializes in manufacturing transformer insulation parts and accessories, including insulation boards, cylinders, rings and blocks, customized to drawings and specifications."
+  );
 
   const cardRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -264,9 +270,15 @@ const ProductListing = () => {
     };
   }, []);
 
-  const style = productData?.image
-    ? { backgroundImage: `url("${productData.image}")` }
-    : undefined;
+  const isMobile = window.innerWidth <= 480;
+
+  const style = {
+    backgroundImage: `url("${
+      isMobile
+        ? productData?.mob_image || productData?.image
+        : productData?.image
+    }")`,
+  };
 
   return (
     <>

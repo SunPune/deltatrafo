@@ -281,7 +281,8 @@ function authenticateAdmin(req, res, next) {
 const ALLOWED_TYPES = {
   "image/jpeg": [".jpg", ".jpeg"],
   "image/png": [".png"],
-  "image/webp": [".webp"]
+  "image/webp": [".webp"],
+  "image/svg+xml": [".svg"]
 };
 
 // Preserve original filename.
@@ -303,7 +304,7 @@ function getSafeOriginalFilename(originalname) {
 
   const ext = path.extname(filename).toLowerCase();
 
-  if (![".jpg", ".jpeg", ".png", ".webp"].includes(ext)) {
+  if (![".jpg", ".jpeg", ".png", ".webp", ".svg"].includes(ext)) {
     throw new Error("Invalid image extension");
   }
 
@@ -436,7 +437,8 @@ async function uploadTempImageToS3(tempId) {
     ".jpg": "image/jpeg",
     ".jpeg": "image/jpeg",
     ".png": "image/png",
-    ".webp": "image/webp"
+    ".webp": "image/webp",
+    ".svg": "image/svg+xml"
   };
 
   // Original filename is preserved in the S3 key.
@@ -457,6 +459,103 @@ async function uploadTempImageToS3(tempId) {
     s3Key,
     localPath
   };
+}
+
+// ==================================================
+// RESOLVE HOMEPAGE IMAGES
+// ==================================================
+
+function getHomeTempId(image) {
+  if (typeof image !== "string") return "";
+
+  if (image.startsWith("/api/temp-images/")) {
+    try {
+      return decodeURIComponent(
+        image.slice("/api/temp-images/".length)
+      );
+    } catch {
+      throw new Error("Invalid temporary homepage image URL");
+    }
+  }
+
+  if (image.startsWith("temp:")) {
+    return image.slice(5);
+  }
+
+  return "";
+}
+
+async function resolveHomeImages(data, uploadedKeys, tempIds) {
+  const uploadedByTempId = new Map();
+
+  async function walk(value) {
+    if (typeof value === "string") {
+      const tempId = getHomeTempId(value);
+
+      if (!tempId) return value;
+
+      if (!isValidTempFilename(tempId)) {
+        throw new Error("Invalid temporary homepage image filename");
+      }
+
+      if (uploadedByTempId.has(tempId)) {
+        return uploadedByTempId.get(tempId);
+      }
+
+      const localPath = path.join(UPLOAD_DIR, tempId);
+
+      try {
+        await fsPromises.access(localPath);
+      } catch {
+        throw new Error(
+          `Temporary homepage image not found: ${tempId}`
+        );
+      }
+
+      const uploaded = await uploadTempImageToS3(tempId);
+
+      uploadedKeys.push(uploaded.s3Key);
+      tempIds.add(tempId);
+      uploadedByTempId.set(tempId, uploaded.imageUrl);
+
+      return uploaded.imageUrl;
+    }
+
+    if (Array.isArray(value)) {
+      return Promise.all(value.map(item => walk(item)));
+    }
+
+    if (value && typeof value === "object") {
+      const result = {};
+
+      for (const [key, child] of Object.entries(value)) {
+        result[key] = await walk(child);
+      }
+
+      return result;
+    }
+
+    return value;
+  }
+
+  return walk(data);
+}
+
+async function deleteTemporaryImages(tempIds) {
+  for (const tempId of tempIds) {
+    if (!isValidTempFilename(tempId)) continue;
+
+    await fsPromises.unlink(
+      path.join(UPLOAD_DIR, tempId)
+    ).catch(error => {
+      if (error.code !== "ENOENT") {
+        console.error(
+          "Temporary homepage image cleanup failed:",
+          error.message
+        );
+      }
+    });
+  }
 }
 
 // ==================================================
@@ -960,6 +1059,8 @@ async function writeHomeData(data) {
   );
 }
 
+// GET HOMEPAGE DATA
+
 app.get("/api/home-data", async (req, res) => {
   try {
     res.json({
@@ -977,10 +1078,18 @@ app.get("/api/home-data", async (req, res) => {
   }
 });
 
+// UPDATE HOMEPAGE DATA
+// Upload local temporary images to S3.
+// Save S3 URLs in MySQL.
+// Delete temporary images after MySQL succeeds.
+
 app.put(
   "/api/home-data",
   authenticateAdmin,
   async (req, res) => {
+    const uploadedKeys = [];
+    const tempIds = new Set();
+
     try {
       const data = req.body;
 
@@ -999,20 +1108,35 @@ app.put(
         });
       }
 
-      await writeHomeData(data);
+      // 1. Upload newly selected local temporary images to S3.
+      const updatedData = await resolveHomeImages(
+        data,
+        uploadedKeys,
+        tempIds
+      );
+
+      // 2. Save permanent S3 URLs in MySQL.
+      await writeHomeData(updatedData);
+
+      // 3. Delete temporary local images after MySQL succeeds.
+      await deleteTemporaryImages(tempIds);
 
       res.json({
         success: true,
         message: "Homepage data updated successfully",
-        data
+        data: updatedData
       });
 
     } catch (error) {
-      console.error("Save homepage data failed:", error.message);
+      // If MySQL fails, delete newly uploaded S3 objects.
+      await deleteUploadedS3Objects(uploadedKeys);
+
+      console.error("Save homepage data failed:", error);
 
       res.status(500).json({
         success: false,
-        message: "Unable to save homepage data"
+        message: "Unable to save homepage data",
+        error: error.message
       });
     }
   }

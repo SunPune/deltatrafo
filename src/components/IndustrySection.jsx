@@ -47,7 +47,7 @@ const IndustrySection = () => {
 
           <span className="section-subtitle">Industries Served</span>
 
-          <h1>Industries We Serve</h1>
+          <h2>Industries We Serve</h2>
 
           <p>
             Delivering high-quality insulation solutions and engineered products

@@ -179,8 +179,12 @@
     font-size: 32px;
   }
 
+  .industry-section .industry-header h2 {
+    font-size: 30px;
+  }
+
   .industry-section .industry-header p {
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.6;
   }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import usePageMeta from "../hooks/usePageMeta";
 
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
@@ -49,6 +50,59 @@ const industries1 = [
 ];
 
 const ManufacturingProcess = () => {
+
+  usePageMeta(
+    "Industries & Applications | Delta Trafo",
+    "Delta Trafo specializes in manufacturing transformer insulation parts and accessories, including insulation boards, cylinders, rings and blocks, customized to drawings and specifications."
+  );
+
+  const [industriesData, setIndustriesData] = useState(null);
+    
+    useEffect(() => {
+  
+      loadIndustriesData();
+
+    }, []);
+
+    const loadIndustriesData = async () => {
+
+    try {
+
+      const response = await fetch(
+        `/api/home-data`
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+
+        setIndustriesData(
+          result.data.industries
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Unable to load industries data:",
+        error
+      );
+
+    }
+
+  };
+  
+  const isMobile = window.innerWidth <= 480;
+
+  const style = {
+    backgroundImage: `url("${
+      isMobile
+        ? industriesData?.mob_image || industriesData?.image
+        : industriesData?.image
+    }")`,
+  };
+
     return (
     <>
       <TopBar />
@@ -57,14 +111,14 @@ const ManufacturingProcess = () => {
 
       <main className="industries-page">
 
-        <section className="heading-section">
+        <section className="heading-section" style={style}>
           <div className="heading-overlay"></div>
 
           <div className="heading-content">
-            <h1>Industries We Serve</h1>
-            <h2>Transformer and Electrical Industry Applications</h2>
+            <h1>{industriesData?.title}</h1>
+            <h2>{industriesData?.subtitle}</h2>
             <p>
-              Our transformer insulation components are manufactured for a range of transformer, electrical equipment and power-sector applications.
+              {industriesData?.description}
             </p>
           </div>
         </section>

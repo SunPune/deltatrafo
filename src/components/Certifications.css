@@ -489,6 +489,10 @@
 
 @media (max-width: 768px) {
 
+  .certificate-slider{
+    transform-style:unset;
+  }
+
   .certificate-section {
     padding:
       60px
@@ -508,7 +512,7 @@
 
 
   .certificate-heading p {
-    font-size: 15px;
+    font-size: 18px;
 
     line-height: 1.6;
   }
@@ -609,7 +613,7 @@
 
 
   .certificate-heading h2 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
 

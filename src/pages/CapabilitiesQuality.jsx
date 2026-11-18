@@ -1,4 +1,5 @@
-  import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import usePageMeta from "../hooks/usePageMeta";
 
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
@@ -13,6 +14,11 @@ import "./CapabilitiesQuality.css";
 import "../components/Certifications.css";
 
 const ManufacturingProcess = () => {
+
+  usePageMeta(
+    "Capabilities & Quality | Delta Trafo",
+    "Delta Trafo specializes in manufacturing transformer insulation parts and accessories, including insulation boards, cylinders, rings and blocks, customized to drawings and specifications."
+  );
 
   const cards = [
   {
@@ -175,8 +181,13 @@ const industries = [
       if (window.innerWidth <= 992) return 2;
       return 3;
     };
+
+    const [capabilitiesQualityData, setCapabilitiesQualityData] = useState(null);
   
     useEffect(() => {
+
+      loadCapabilitiesQualityData();
+
       const handleResize = () => {
         const newCardsToShow = getCardsToShow();
         setCardsToShow(newCardsToShow);
@@ -245,7 +256,44 @@ const industries = [
   
     const activeDot = ((currentIndex - cardsToShow) % products.length + products.length) % products.length;
   
-  
+    const loadCapabilitiesQualityData = async () => {
+    
+        try {
+    
+          const response = await fetch(
+            `/api/home-data`
+          );
+    
+          const result = await response.json();
+    
+          if (result.success) {
+    
+            setCapabilitiesQualityData(
+              result.data.capabilities_quality
+            );
+    
+          }
+    
+        } catch (error) {
+    
+          console.error(
+            "Unable to load capabilities and quality data:",
+            error
+          );
+    
+        }
+    
+      };
+      
+    const isMobile = window.innerWidth <= 480;
+
+    const style = {
+      backgroundImage: `url("${
+        isMobile
+          ? capabilitiesQualityData?.mob_image || capabilitiesQualityData?.image
+          : capabilitiesQualityData?.image
+      }")`,
+    };
 
     return (
     <>
@@ -255,14 +303,14 @@ const industries = [
 
       <main className="capabilities-quality-page">
 
-        <section className="heading-section">
+        <section className="heading-section" style={style}>
           <div className="heading-overlay"></div>
 
           <div className="heading-content">
-            <h1>Capabilities & Quality</h1>
-            <h2>Manufacturing Process, Facilities and Quality Assurance</h2>
+            <h1>{capabilitiesQualityData?.title}</h1>
+            <h2>{capabilitiesQualityData?.subtitle}</h2>
             <p>
-              Our manufacturing approach combines technical review, material selection, processing, machining, dimensional inspection, final quality inspection and controlled packing and dispatch.
+              {capabilitiesQualityData?.description}
             </p>
           </div>
         </section>

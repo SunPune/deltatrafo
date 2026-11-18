@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import usePageMeta from "../hooks/usePageMeta";
+
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
 
@@ -19,6 +21,12 @@ const AboutSection = ({
   imageLeft = false,
   parentClass,
 }) => {
+
+  usePageMeta(
+    "About Us | Delta Trafo",
+    "Delta Trafo specializes in manufacturing transformer insulation parts and accessories, including insulation boards, cylinders, rings and blocks, customized to drawings and specifications."
+  );
+
   const sectionRef = useRef(null); 
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -64,6 +72,54 @@ const AboutSection = ({
   };
     
   const AboutUs = () => {
+
+    const [aboutData, setAboutData] = useState(null);
+
+    useEffect(() => {
+      
+          loadAboutData();
+    
+        }, []);
+    
+        const loadAboutData = async () => {
+    
+        try {
+    
+          const response = await fetch(
+            `/api/home-data`
+          );
+    
+          const result = await response.json();
+    
+          if (result.success) {
+    
+            setAboutData(
+              result.data.about
+            );
+    
+          }
+    
+        } catch (error) {
+    
+          console.error(
+            "Unable to load about data:",
+            error
+          );
+    
+        }
+    
+      };
+      
+      const isMobile = window.innerWidth <= 480;
+
+      const style = {
+        backgroundImage: `url("${
+          isMobile
+            ? aboutData?.mob_featuredImage || aboutData?.featuredImage
+            : aboutData?.featuredImage
+        }")`,
+      };
+
     return (
     <>
       <TopBar />
@@ -72,13 +128,14 @@ const AboutSection = ({
 
       <main className="about-page">
 
-        <section className="heading-section">
+        <section className="heading-section" style={style}>
           <div className="heading-overlay"></div>
 
           <div className="heading-content">
-            <h1>About Delta Trafo</h1>
+            <h1>{aboutData?.title}</h1>
+            <h2>{aboutData?.subtitle}</h2>
             <p>
-              Specialized Manufacturing of Transformer Insulation Parts & Accessories.
+              {aboutData?.description}
             </p>
           </div>
         </section>

@@ -11,7 +11,7 @@ const Footer = () => {
 
         {/* Company */}
         <div className="footer-column footer-company">
-          <Link to="/" className="footer-logo">
+          <Link to="/" className="footer-logo" target="_blank">
             <img
               src="/images/deltatrafo-logo.png"
               alt="DeltaTrafo"
@@ -29,22 +29,24 @@ const Footer = () => {
 
           <ul className="footer-menu">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" target="_blank">Home</Link>
             </li>
             <li>
-              <Link to="/about-us">About Us</Link>
+              <Link to="/about-us" target="_blank">About Us</Link>
             </li>
             <li>
-              <Link to="/products">Products</Link>
+              <Link to="/products" target="_blank">
+                Products
+              </Link>
             </li>
             <li>
-              <Link to="/capabilities-quality">Capabilities & Quality</Link>
+              <Link to="/capabilities-quality" target="_blank">Capabilities & Quality</Link>
             </li>
             <li>
-              <Link to="/industries">Industries</Link>
+              <Link to="/industries" target="_blank">Industries</Link>
             </li>
             <li>
-              <Link to="/contact-us">Contact Us</Link>
+              <Link to="/contact-us" target="_blank">Contact Us</Link>
             </li>
           </ul>
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import usePageMeta from "../hooks/usePageMeta";
 
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
@@ -10,10 +11,20 @@ import "./ContactUs.css";
 
 const ContactUs = () => {
 
+  usePageMeta(
+    "Contact Us | Delta Trafo",
+    "Get in touch with Delta Trafo, a manufacturer specializing in transformer insulation parts and accessories with customized manufacturing solutions."
+  );
+
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const [aboutData, setAboutData] = useState(null);
   
   useEffect(() => {
+
+    loadAboutData();
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,7 +42,45 @@ const ContactUs = () => {
     }
     return () => observer.disconnect();
   }, []);
+
+  const loadAboutData = async () => {
+
+    try {
+
+      const response = await fetch(
+        `/api/home-data`
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+
+        setAboutData(
+          result.data.contact
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Unable to load About data:",
+        error
+      );
+
+    }
+
+  };
   
+  const isMobile = window.innerWidth <= 480;
+
+  const style = {
+    backgroundImage: `url("${
+      isMobile
+        ? aboutData?.mob_image || aboutData?.image
+        : aboutData?.image
+    }")`,
+  };
   
   return (
     <>
@@ -41,13 +90,14 @@ const ContactUs = () => {
 
       <main class="contact-us-page">
 
-        <section className="heading-section">
+        <section className="heading-section" style={style}>
           <div className="heading-overlay"></div>
 
           <div className="heading-content">
-            <h1>Contact Delta Trafo</h1>
+            <h1>{aboutData?.title || ""}</h1>
+            <h2>{aboutData?.subtitle || ""}</h2>
             <p>
-              Let's discuss your transformer insulation component requirements.
+              {aboutData?.description || ""}
             </p>
           </div>
         </section>

@@ -41,6 +41,7 @@ function HomePage() {
 
   const [aboutData, setAboutData] = useState(null);
   const [productData, setproductData] = useState(null);
+  const [WhyDeltaTrafoData, setWhyDeltaTrafoData] = useState(null);
 
   const loadAbout = async () => {
 
@@ -58,6 +59,7 @@ function HomePage() {
       if (result.success) {
         setAboutData(result.data.about);
         setproductData(result.data.products);
+        setWhyDeltaTrafoData(result.data.features);
       }
     } catch (error) {
       console.error("Unable to load About data:", error);
@@ -83,7 +85,7 @@ function HomePage() {
 
         <ProductSection productData={productData}/>
 
-        <WhyDeltaTrafo />
+        <WhyDeltaTrafo WhyDeltaTrafoData={WhyDeltaTrafoData} />
 
         <IndustrySection />
 

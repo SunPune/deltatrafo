@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import usePageMeta from "../hooks/usePageMeta";
+
 import { Link, useParams } from "react-router-dom";
 
 import TopBar from "../components/TopBar";
@@ -11,6 +13,11 @@ import "./ProductDetails.css";
 const API_URL = "/api/products";
 
 function ProductDetails() {
+
+  usePageMeta(
+    "Products | Delta Trafo",
+    "Delta Trafo specializes in manufacturing transformer insulation parts and accessories, including insulation boards, cylinders, rings and blocks, customized to drawings and specifications."
+  );
 
   const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);

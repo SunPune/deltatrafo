@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const API_URL = "";
 const TOKEN_KEY = "deltatrafo_admin_token";
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const ALLOWED_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/svg+xml",
+];
 const MAX_SIZE = 5 * 1024 * 1024;
 
 // ------------------------------------------------
@@ -45,6 +50,58 @@ function ImageField({ label, value, onChange, onUpload, busy }) {
 
           <button type="button" onClick={() => onChange("")}>
             Remove Image
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+function IconUploadField({ value, onUpload, onChange, busy }) {
+  return (
+    <div className="admin-field">
+      <label>Feature Icon Path</label>
+
+      <input
+        type="text"
+        value={value || ""}
+        placeholder="Enter icon image URL"
+        onChange={(event) => onChange(event.target.value)}
+      />
+
+      <label>Upload Feature Icon</label>
+
+      <input
+        type="file"
+        accept=".svg,.jpg,.jpeg,.png,.webp,image/svg+xml,image/jpeg,image/png,image/webp"
+        onChange={(event) => onUpload(event, onChange)}
+        disabled={busy}
+      />
+
+      {value && (
+        <div className="admin-image-preview">
+          <img
+            src={value}
+            alt="Feature Icon"
+            style={{
+              width: 60,
+              height: 60,
+              objectFit: "contain",
+            }}
+            onError={(event) => {
+              event.currentTarget.style.display = "none";
+            }}
+            onLoad={(event) => {
+              event.currentTarget.style.display = "block";
+            }}
+          />
+
+          <button
+            type="button"
+            onClick={() => onChange("")}
+          >
+            Remove Icon
           </button>
         </div>
       )}
@@ -154,6 +211,98 @@ function AdminDashboard() {
     }));
   };
 
+  const updateCapabilitiesQuality = (field, value) => {
+    setHomeData((previous) => ({
+      ...previous,
+      "capabilities_quality": { ...previous["capabilities_quality"], [field]: value },
+    }));
+  };
+
+  const updateIndustries = (field, value) => {
+    setHomeData((previous) => ({
+      ...previous,
+      industries: { ...previous.industries, [field]: value },
+    }));
+  };
+
+  const updateContact = (field, value) => {
+    setHomeData((previous) => ({
+      ...previous,
+      contact: { ...previous.contact, [field]: value },
+    }));
+  };
+
+  
+// ------------------------------------------------
+// Features Content
+// ------------------------------------------------
+const updateFeaturesContent = (field, value) => {
+  setHomeData((previous) => ({
+    ...previous,
+    features: {
+      ...previous.features,
+      [field]: value,
+    },
+  }));
+};
+
+// ------------------------------------------------
+// Features Items
+// ------------------------------------------------
+const updateFeatureItem = (index, field, value) => {
+  setHomeData((previous) => {
+    const items = [...(previous.features?.items || [])];
+
+    items[index] = {
+      ...items[index],
+      [field]: value,
+    };
+
+    return {
+      ...previous,
+      features: {
+        ...previous.features,
+        items,
+      },
+    };
+  });
+};
+
+const addFeature = () => {
+  setHomeData((previous) => ({
+    ...previous,
+    features: {
+      ...previous.features,
+      items: [
+        ...(previous.features?.items || []),
+        {
+          icon: "",
+          iconImage: "",
+          title: "",
+          description: "",
+        },
+      ],
+    },
+  }));
+};
+
+const deleteFeature = (index) => {
+  if (!window.confirm("Are you sure you want to delete this feature?")) {
+    return;
+  }
+
+  setHomeData((previous) => ({
+    ...previous,
+    features: {
+      ...previous.features,
+      items: (previous.features?.items || []).filter(
+        (_, i) => i !== index
+      ),
+    },
+  }));
+};
+
+
   // ------------------------------------------------
   // Save JSON
   // ------------------------------------------------
@@ -209,8 +358,13 @@ function AdminDashboard() {
     const file = input.files?.[0];
     if (!file) return;
 
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      setMessage("Please select a JPG, PNG, or WebP image.");
+    const allowedExtensions = /\.(jpe?g|png|webp|svg)$/i;
+
+    if (
+      !ALLOWED_TYPES.includes(file.type) ||
+      !allowedExtensions.test(file.name)
+    ) {
+      setMessage("Please select a JPG, PNG, WebP, or SVG image.");
       input.value = "";
       return;
     }
@@ -459,6 +613,23 @@ function AdminDashboard() {
               onChange={(event) => updateAbout("cta_name", event.target.value)}
             />
           </div>
+
+          <ImageField
+            label="Featured about us Page Image (16:9 Aspect Ratio)"
+            value={homeData.about?.featuredImage}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateAbout("featuredImage", url)}
+          />
+
+          <ImageField
+            label="Mobile Featured about us Page Image (16:9 Aspect Ratio)"
+            value={homeData.about?.mob_featuredImage}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateAbout("mob_featuredImage", url)}
+          />
+
         </section>
 
         {/* OUR PRODUCTS */}
@@ -491,12 +662,20 @@ function AdminDashboard() {
           </div>
 
           <ImageField
-            label="Products Section Image"
+            label="Products Section Image (16:9 Aspect Ratio)"
             value={homeData.products?.image}
             busy={busy}
             onUpload={uploadImage}
             onChange={(url) => updateProducts("image", url)}
           />
+
+          <ImageField
+            label="Mobile Products Section Image (2:3 Aspect Ratio)"
+            value={homeData.products?.mob_image}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateProducts("mob_image", url)}
+          /> 
 
           <div className="admin-field">
             <label>Description</label>
@@ -534,6 +713,288 @@ function AdminDashboard() {
             />
           </div>
         </section>
+
+
+        {/* Capabilities Quality */}
+        <section className="admin-section">
+          <div className="admin-section-header">
+            <div className="admin-section-header-text">
+              <h2>Capabilities & Quality</h2>
+              <p>Update Our Capabilities & Quality content.</p>
+            </div>
+          </div>
+
+          <div className="admin-field">
+            <label>Title</label>
+            <input
+              type="text"
+              value={homeData.capabilities_quality?.title || ""}
+              onChange={(event) => updateCapabilitiesQuality("title", event.target.value)}
+            />
+          </div>
+
+          <div className="admin-field">
+            <label>Sub Title</label>
+            <input
+              type="text"
+              value={homeData.capabilities_quality?.subtitle || ""}
+              onChange={(event) =>
+                updateCapabilitiesQuality("subtitle", event.target.value)
+              }
+            />
+          </div>
+
+          <ImageField
+            label="Capabilities & Quality Image (16:9 Aspect Ratio)"
+            value={homeData.capabilities_quality?.image}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateCapabilitiesQuality("image", url)}
+          />
+
+          <ImageField
+            label="Mobile Capabilities & Quality Image (2:3 Aspect Ratio)"
+            value={homeData.capabilities_quality?.mob_image}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateCapabilitiesQuality("mob_image", url)}
+          />
+
+          <div className="admin-field">
+            <label>Description</label>
+            <textarea
+              rows="8"
+              value={homeData.capabilities_quality?.description || ""}
+              onChange={(event) =>
+                updateCapabilitiesQuality("description", event.target.value)
+              }
+            />
+          </div>
+
+        </section>
+
+        {/* Industries */}
+        <section className="admin-section">
+          <div className="admin-section-header">
+            <div className="admin-section-header-text">
+              <h2>Industries</h2>
+              <p>Update Our Industries content.</p>
+            </div>
+          </div>
+
+          <div className="admin-field">
+            <label>Title</label>
+            <input
+              type="text"
+              value={homeData.industries?.title || ""}
+              onChange={(event) => updateIndustries("title", event.target.value)}
+            />
+          </div>
+
+          <div className="admin-field">
+            <label>Sub Title</label>
+            <input
+              type="text"
+              value={homeData.industries?.subtitle || ""}
+              onChange={(event) =>
+                updateIndustries("subtitle", event.target.value)
+              }
+            />
+          </div>
+
+          <ImageField
+            label="Industries Image (16:9 Aspect Ratio)"
+            value={homeData.industries?.image}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateIndustries("image", url)}
+          />
+
+          <ImageField
+            label="Mobile Industries Image (2:3 Aspect Ratio)"
+            value={homeData.industries?.mob_image}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateIndustries("mob_image", url)}
+          />
+
+          <div className="admin-field">
+            <label>Description</label>
+            <textarea
+              rows="8"
+              value={homeData.industries?.description || ""}
+              onChange={(event) =>
+                updateIndustries("description", event.target.value)
+              }
+            />
+          </div>
+
+        </section>
+
+        {/* Contact Us */}
+        <section className="admin-section">
+          <div className="admin-section-header">
+            <div className="admin-section-header-text">
+              <h2>Contact Us</h2>
+              <p>Update Our Contact Us content.</p>
+            </div>
+          </div>
+
+          <div className="admin-field">
+            <label>Title</label>
+            <input
+              type="text"
+              value={homeData.contact?.title || ""}
+              onChange={(event) => updateContact("title", event.target.value)}
+            />
+          </div>
+
+          <div className="admin-field">
+            <label>Sub Title</label>
+            <input
+              type="text"
+              value={homeData.contact?.subtitle || ""}
+              onChange={(event) =>
+                updateContact("subtitle", event.target.value)
+              }
+            />
+          </div>
+
+          <ImageField
+            label="Contact Us Image(16:9 Aspect Ratio)"
+            value={homeData.contact?.image}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateContact("image", url)}
+          />
+
+          <ImageField
+            label="Mobile Contact Us Image(2:3 Aspect Ratio)"
+            value={homeData.contact?.mob_image}
+            busy={busy}
+            onUpload={uploadImage}
+            onChange={(url) => updateContact("mob_image", url)}
+          />
+
+          <div className="admin-field">
+            <label>Description</label>
+            <textarea
+              rows="8"
+              value={homeData.contact?.description || ""}
+              onChange={(event) =>
+                updateContact("description", event.target.value)
+              }
+            />
+          </div>
+
+        </section>
+
+
+        {/* FEATURES */}
+        <section className="admin-section">
+          <div className="admin-section-header">
+            <div className="admin-section-header-text">
+              <h2>Why Delta Trafo</h2>
+              <p>Update homepage Why Delta Trafo.</p>
+            </div>
+
+            <button
+              type="button"
+              className="admin-add-button"
+              onClick={addFeature}
+            >
+              + Add Feature
+            </button>
+          </div>
+
+          {/* H1 */}
+          <div className="admin-field">
+            <label>Title</label>
+            <input
+              type="text"
+              value={homeData.features?.title || ""}
+              onChange={(event) =>
+                updateFeaturesContent("title", event.target.value)
+              }
+            />
+          </div>
+
+          {/* H2 */}
+          <div className="admin-field">
+            <label>Sub Title</label>
+            <input
+              type="text"
+              value={homeData.features?.subtitle || ""}
+              onChange={(event) =>
+                updateFeaturesContent("subtitle", event.target.value)
+              }
+            />
+          </div>
+
+          {/* Description */}
+          <div className="admin-field">
+            <label>Description</label>
+            <textarea
+              rows="5"
+              value={homeData.features?.description || ""}
+              onChange={(event) =>
+                updateFeaturesContent("description", event.target.value)
+              }
+            />
+          </div>
+
+          <hr />
+
+          <h3>Feature Items</h3>
+
+          {(homeData.features?.items || []).map((feature, index) => (
+            <div className="banner-editor" key={index}>
+              <div className="banner-editor-header">
+                <h3>Feature {index + 1}</h3>
+
+                <button
+                  type="button"
+                  className="delete-button"
+                  onClick={() => deleteFeature(index)}
+                >
+                  Remove Feature
+                </button>
+              </div>
+
+              <IconUploadField
+                value={feature.iconImage || ""}
+                busy={busy}
+                onUpload={uploadImage}
+                onChange={(url) =>
+                  updateFeatureItem(index, "iconImage", url)
+                }
+              />
+
+              <div className="admin-field">
+                <label>Title</label>
+                <input
+                  type="text"
+                  value={feature.title || ""}
+                  onChange={(event) =>
+                    updateFeatureItem(index, "title", event.target.value)
+                  }
+                />
+              </div>
+
+              <div className="admin-field">
+                <label>Description</label>
+                <textarea
+                  rows="4"
+                  value={feature.description || ""}
+                  onChange={(event) =>
+                    updateFeatureItem(index, "description", event.target.value)
+                  }
+                />
+              </div>
+            </div>
+          ))}
+        </section>
+
 
         {/* SAVE */}
         <div className="admin-save-area">
